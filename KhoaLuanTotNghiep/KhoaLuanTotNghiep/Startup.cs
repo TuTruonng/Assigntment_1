@@ -1,6 +1,7 @@
 using KhoaLuanTotNghiep.Data;
 using KhoaLuanTotNghiep_BackEnd.IdentityServer;
 using KhoaLuanTotNghiep_BackEnd.Interface;
+using KhoaLuanTotNghiep_BackEnd.InterfaceService;
 using KhoaLuanTotNghiep_BackEnd.Models;
 using KhoaLuanTotNghiep_BackEnd.Service;
 using Microsoft.AspNetCore.Builder;
@@ -38,6 +39,7 @@ namespace KhoaLuanTotNghiep_BackEnd {
 
             services.AddTransient<IUser, UserService>();
             services.AddTransient<Icategory, CategoryService>();
+            services.AddTransient<IRealEstate, RealEstateService>();
 
             services.AddCors(options =>
             {

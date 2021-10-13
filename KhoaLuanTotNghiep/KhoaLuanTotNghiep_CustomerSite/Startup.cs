@@ -58,7 +58,7 @@ namespace KhoaLuanTotNghiep_CustomerSite
          
 
             services.AddHttpClient();
-            services.AddTransient<IProductApiClient, ProductApiClient>();
+            services.AddTransient<IRealEstateApiClient, RealEstateApiClient>();
             services.AddTransient<ICategoryApiClient, CategoryApiClient>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

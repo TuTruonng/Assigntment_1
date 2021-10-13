@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace KhoaLuanTotNghiep_CustomerSite.Service
 {
-    public class ProductApiClient : IProductApiClient
+    public class RealEstateApiClient : IRealEstateApiClient
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _configuration;
 
-        public ProductApiClient(IHttpContextAccessor httpContextAccessor, IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public RealEstateApiClient(IHttpContextAccessor httpContextAccessor, IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _httpClientFactory = httpClientFactory;
             _httpContextAccessor = httpContextAccessor;
@@ -24,15 +24,15 @@ namespace KhoaLuanTotNghiep_CustomerSite.Service
         public async Task<IList<RealEstateModel>> GetProducts()
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync(_configuration.GetValue<string>("Backend") + "Category");
+            var response = await client.GetAsync(_configuration.GetValue<string>("Backend") + "RealEstate");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<IList<RealEstateModel>>();
         }
 
-        public async Task<RealEstateModel> GetProductById(int id)
+        public async Task<RealEstateModel> GetProductById(string id)
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync(_configuration.GetValue<string>("Backend") + "Product/" + id.ToString());
+            var response = await client.GetAsync(_configuration.GetValue<string>("Backend") + "RealEstate/" + id);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<RealEstateModel>();
         }
@@ -40,7 +40,7 @@ namespace KhoaLuanTotNghiep_CustomerSite.Service
         public async Task<IList<RealEstatefromCategory>> GetProductByCategory(string categoryName)
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync(_configuration.GetValue<string>("Backend") + "Product/category=" + categoryName);
+            var response = await client.GetAsync(_configuration.GetValue<string>("Backend") + "RealEstate/category=" + categoryName);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<IList<RealEstatefromCategory>>();
         }

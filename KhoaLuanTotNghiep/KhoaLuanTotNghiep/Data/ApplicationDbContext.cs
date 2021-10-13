@@ -10,7 +10,7 @@ namespace KhoaLuanTotNghiep.Data
             : base(options)
         {
         }
-
+        
         public DbSet<Category> categories { get; set; }
 
         public DbSet<RealEstate> realEstates { get; set; }

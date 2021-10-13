@@ -13,9 +13,9 @@ namespace KhoaLuanTotNghiep_CustomerSite.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IProductApiClient _productApiClient;
+        private readonly IRealEstateApiClient _productApiClient;
 
-        public HomeController(ILogger<HomeController> logger, IProductApiClient productApiClient)
+        public HomeController(ILogger<HomeController> logger, IRealEstateApiClient productApiClient)
         {
             _logger = logger;
             _productApiClient = productApiClient;

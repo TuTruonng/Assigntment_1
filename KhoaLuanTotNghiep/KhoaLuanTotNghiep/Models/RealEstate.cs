@@ -8,7 +8,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Models
 {
     public class RealEstate
     {
-        [Key]
         public string RealEstateID { get; set; }
         public string UserID { get; set; }
         public int CategoryID { get; set; }

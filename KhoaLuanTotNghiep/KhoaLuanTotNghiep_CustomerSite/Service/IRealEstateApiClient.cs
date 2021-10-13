@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace KhoaLuanTotNghiep_CustomerSite.Service
 {
-    public interface IProductApiClient
+    public interface IRealEstateApiClient
     {
         Task<IList<RealEstateModel>> GetProducts();
 
-        Task<RealEstateModel> GetProductById(int id);
+        Task<RealEstateModel> GetProductById(string id);
 
         Task<IList<RealEstatefromCategory>> GetProductByCategory(string categoryName);
 
