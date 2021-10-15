@@ -1,6 +1,6 @@
 ﻿@model IList<ShareModel.RealEstateModel>
 @section Styles {
-    <link rel="stylesheet" href="~/css/main.css" />
+    <link rel="stylesheet" href="~/css/home.css" />
 }
 
 
@@ -79,103 +79,30 @@
             </div>
         </div>
     </div>
-    @foreach (var product in @Model)
-    {
-<div class="container" id="title-RealEstate">
-    <h2>Bất động sản dành cho bạn</h2>
-</div>
-                <div class="card-deck">
-                    <div class="card" style="width: 0; height: 0; border: none">
-                        <img class="card-img-top" src="~/images/main.jpg" style="width: 0; height: 0">
 
-                    </div>
-                </div>
-                                <div class="card-deck" id="card-RealEstate">
-                                    <div class="card">
-                                        <img class="card-img-top" src="@product.Image" alt="Card image cap">
-                                        <div class="card-body">
-                                            <p class="card-title">Chỉ 2.8 tỷ sở hữu ngay nhà đẹp tại Phú Diễn 36 m2, 5 tầng, gần chợ Mới, gần trường, ô tô đỗ cổng</p>
-                                            <p class="card-text">3.88 tỷ    55 m2  <br />    Bắc Tử Liêm, Hà Nội</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <small class="text-muted">Last updated 3 mins ago</small>
-                                        </div>
-                                    </div>
-                                    @*<div class="card">
-                                            <img class="card-img-top" src="@product.Image" alt="Card image cap">
-                                            <div class="card-body">
-                                                <p class="card-title">Chỉ 2.8 tỷ sở hữu ngay nhà đẹp tại Phú Diễn 36 m2, 5 tầng, gần chợ Mới, gần trường, ô tô đỗ cổng</p>
-                                                <p class="card-text">3.88 tỷ    55 m2  <br />    Bắc Tử Liêm, Hà Nội</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <small class="text-muted">Last updated 3 mins ago</small>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <img class="card-img-top" src="~/images/main.jpg" alt="Card image cap">
-                                            <div class="card-body">
-                                                <p class="card-title">Chỉ 2.8 tỷ sở hữu ngay nhà đẹp tại Phú Diễn 36 m2, 5 tầng, gần chợ Mới, gần trường, ô tô đỗ cổng</p>
-                                                <p class="card-text">3.88 tỷ    55 m2  <br />    Bắc Tử Liêm, Hà Nội</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <small class="text-muted">Last updated 3 mins ago</small>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <img class="card-img-top" src="~/images/main.jpg" alt="Card image cap">
-                                            <div class="card-body">
-                                                <p class="card-title">Chỉ 2.8 tỷ sở hữu ngay nhà đẹp tại Phú Diễn 36 m2, 5 tầng, gần chợ Mới, gần trường, ô tô đỗ cổng</p>
-                                                <p class="card-text">3.88 tỷ    55 m2  <br />    Bắc Tử Liêm, Hà Nội</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <small class="text-muted">Last updated 3 mins ago</small>
-                                            </div>
-                                        </div>*@
-                                </div>
-            }
-                                                <div class="container" id="title-RealEstate">
-                                                    <h2>Dự án nổi bật</h2>
-                                                </div>
-                                                                <div class="card-deck" id="card-RealEstate">
-                                                                    <div class="card">
-                                                                        <img class="card-img-top" src="~/images/main.jpg" alt="Card image cap">
-                                                                        <div class="card-body">
-                                                                            <p class="card-title">Chỉ 2.8 tỷ sở hữu ngay nhà đẹp tại Phú Diễn 36 m2, 5 tầng, gần chợ Mới, gần trường, ô tô đỗ cổng</p>
-                                                                            <p class="card-text">3.88 tỷ    55 m2  <br />    Bắc Tử Liêm, Hà Nội</p>
-                                                                        </div>
-                                                                        <div class="card-footer">
-                                                                            <small class="text-muted">Last updated 3 mins ago</small>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="card">
-                                                                        <img class="card-img-top" src="~/images/main.jpg" alt="Card image cap">
-                                                                        <div class="card-body">
-                                                                            <p class="card-title">Chỉ 2.8 tỷ sở hữu ngay nhà đẹp tại Phú Diễn 36 m2, 5 tầng, gần chợ Mới, gần trường, ô tô đỗ cổng</p>
-                                                                            <p class="card-text">3.88 tỷ    55 m2  <br />    Bắc Tử Liêm, Hà Nội</p>
-                                                                        </div>
-                                                                        <div class="card-footer">
-                                                                            <small class="text-muted">Last updated 3 mins ago</small>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="card">
-                                                                        <img class="card-img-top" src="~/images/main.jpg" alt="Card image cap">
-                                                                        <div class="card-body">
-                                                                            <p class="card-title">Chỉ 2.8 tỷ sở hữu ngay nhà đẹp tại Phú Diễn 36 m2, 5 tầng, gần chợ Mới, gần trường, ô tô đỗ cổng</p>
-                                                                            <p class="card-text">3.88 tỷ    55 m2  <br />    Bắc Tử Liêm, Hà Nội</p>
-                                                                        </div>
-                                                                        <div class="card-footer">
-                                                                            <small class="text-muted">Last updated 3 mins ago</small>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="card">
-                                                                        <img class="card-img-top" src="~/images/main.jpg" alt="Card image cap">
-                                                                        <div class="card-body">
-                                                                            <p class="card-title">Chỉ 2.8 tỷ sở hữu ngay nhà đẹp tại Phú Diễn 36 m2, 5 tầng, gần chợ Mới, gần trường, ô tô đỗ cổng</p>
-                                                                            <p class="card-text">3.88 tỷ    55 m2  <br />    Bắc Tử Liêm, Hà Nội</p>
-                                                                        </div>
-                                                                        <div class="card-footer">
-                                                                            <small class="text-muted">Last updated 3 mins ago</small>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                            </div>
+    <div class="container" id="title-RealEstate">
+        <h2>Bất động sản dành cho bạn</h2>
+    </div>
+    <div class="card-deck">
+        <div class="card" style="width: 0; height: 0; border: none">
+            <img class="card-img-top" src="~/images/main.jpg" style="width: 0; height: 0">
+
+        </div>
+    </div>
+    <div class="card-deck" id="card-RealEstate">
+        @foreach (var product in Model)
+        {
+<div class="card" asp-action="Details" asp-controller="RealEstate" asp-route-id="@product.RealEstateID">
+    <img class="card-img-top" src="@product.Image" alt="Card image cap">
+    <div class="card-body">
+        <p class="card-title">@product.Title</p>
+        <p class="card-text">@product.Price  <br />    @product.Location</p>
+    </div>
+    <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+    </div>
+</div>}
+
+    </div>
+
+</div>

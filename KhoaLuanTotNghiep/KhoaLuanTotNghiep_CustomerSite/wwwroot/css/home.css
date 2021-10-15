@@ -35,7 +35,6 @@
     z-index: 2;
     position: absolute;
     top: 343px;
-
     display: inline-block;
     background-color: #ffffff;
 }
@@ -149,30 +148,34 @@ li {
         background: blue
     }
 
-    #card-items{
-        margin: 10%;
-        width: 100%;
-        background-color: yellow;
-    }
+#card-items {
+    margin: 10%;
+    width: 100%;
+    background-color: yellow;
+}
 
-#card-img1{
+#card-img1 {
     width: 100%;
     height: 0%;
     background-color: aqua
 }
 
-.card-title{
+.card-title {
     color: cornflowerblue;
 }
 
-.card-text{
+.card-text {
     font-weight: bold;
 }
 
-#title-RealEstate{
+#title-RealEstate {
     margin: 2% 5% 2% 5%;
 }
 
 #card-RealEstate {
     margin: 1% 5% 2% 5%;
+}
+
+.card-img-top {
+    height: 50%;
 }

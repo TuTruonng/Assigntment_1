@@ -129,6 +129,20 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
             return product;
         }
 
-     
+        public async Task<IEnumerable<RealEstatefromCategory>> GetByCategoryAsync(string categoryName)
+        {
+            var products = await _dbContext.realEstates.Include(p => p.category).Where(p => p.category.CategoryName == categoryName).Select(p =>
+                 new RealEstatefromCategory
+                 {
+                     Title = p.Title,
+                     Description = p.Description,
+                     Price = p.Price,
+                     Image = p.Image,
+                     CategoryName = p.category.CategoryName
+                 }).ToListAsync();
+
+            return products;
+        }
+
     }
 }
