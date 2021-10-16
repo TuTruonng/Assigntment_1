@@ -37,25 +37,6 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-        @*  *@}
-        <div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav d-flex justify-content-start" role="banner" id="nav-header">
-            <div class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" id="nav-item">
-                <div class="navbar-collapse collapse d-flex justify-content-center" id="nav1">
-                    <ul class="nav navbar-nav navbar-right" id="item1">
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Nhà đất bán</a>
-                        </li>
-
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Nhà đất cho thuê</a>
-                        </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Dự án</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
         <div id="frm-main" asp-controller="Movies" asp-action="Index" method="get" ">
             <div class="col height d-flex justify-content-center align-items-center" style="width: 100%; height: 100%">
                 <div class="dropdown" id="drop-category">
@@ -89,20 +70,28 @@
 
         </div>
     </div>
+  
+        
     <div class="card-deck" id="card-RealEstate">
         @foreach (var product in Model)
         {
-<div class="card" asp-action="Details" asp-controller="RealEstate" asp-route-id="@product.RealEstateID">
-    <img class="card-img-top" src="@product.Image" alt="Card image cap">
-    <div class="card-body">
-        <p class="card-title">@product.Title</p>
-        <p class="card-text">@product.Price  <br />    @product.Location</p>
-    </div>
-    <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-    </div>
-</div>}
+        
 
-    </div>
+        <a class="card" asp-action="Details" asp-controller="RealEstate" asp-route-id="@product.RealEstateID">
+           
+                <img class="card-img-top" src="@product.Image" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-title">@product.Title</p>
+                    <p class="card-text">@product.Price  <br />    @product.Location</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
 
+        </a>
+
+                }
+        </div>
+   
+    
 </div>

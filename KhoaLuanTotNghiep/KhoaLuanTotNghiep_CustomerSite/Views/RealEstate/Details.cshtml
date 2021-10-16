@@ -2,8 +2,8 @@
 @using Microsoft.AspNetCore.Http
 <div class="p-5 border rounded">
     <div class="form-group row ">
-        <div class="col-6" style="width:100%; text-align: center;">
-            <img src="@Model.Image" alt="New york" style="height:450px;">
+        <div class="col-6" style="text-align: center;">
+            <img src="@Model.Image" alt="New york" style="width:450px;">
         </div>
         <div class="col-6">
 
@@ -31,14 +31,14 @@
             <div>
                 @using (Html.BeginForm("addProductToCart", "Product", FormMethod.Post))
                 {
-    <input type="hidden" id="id" name="id" value=@Model.RealEstateID />
+                    <input type="hidden" id="id" name="id" value=@Model.RealEstateID />
                     <input type="hidden" id="qty" name="qty" value=1 />
-                                    <button id="addCart" name="addCart" type="submit" class="btn btn-primary btn-lg btn-block"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng</button>}
+                    <button id="addCart" name="addCart" type="submit" class="btn btn-primary btn-lg btn-block"><i class="fas fa-shopping-cart"></i> Thêm vào yêu thích</button>}
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <input hidden asp-for="@Model.RealEstateID" />
                 <a asp-controller="Home" asp-action="Index" class="btn btn-success">Back</a>
-            </div>
+            </div>*@
         </div>
     </div>
 </div>
