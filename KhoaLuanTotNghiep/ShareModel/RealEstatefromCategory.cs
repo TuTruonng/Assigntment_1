@@ -25,8 +25,6 @@ namespace ShareModel
 
         public string Description { get; set; }
 
-        public int Quantity { get; set; }
-
         public string acreage { get; set; }
 
         public int Approve { get; set; }

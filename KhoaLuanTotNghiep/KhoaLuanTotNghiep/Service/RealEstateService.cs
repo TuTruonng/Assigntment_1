@@ -1,4 +1,5 @@
-﻿using KhoaLuanTotNghiep.Data;
+﻿using Gremlin.Net.Process.Traversal;
+using KhoaLuanTotNghiep.Data;
 using KhoaLuanTotNghiep_BackEnd.InterfaceService;
 using KhoaLuanTotNghiep_BackEnd.Models;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +35,11 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
 
         public async Task<IEnumerable<RealEstateModel>> GetAllAsync()
         {
-            var product = await _dbContext.realEstates.Include(p => p.category).Select(p =>
+            var product = await _dbContext.realEstates.Include(p => p.category).Join(
+            _dbContext.Users,
+            p => p.UserID,
+            u => u.Id,
+            (p, u) =>
                 new RealEstateModel
                 {
                     RealEstateID = p.RealEstateID,
@@ -46,12 +51,11 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
                     Price = p.Price,
                     Image = p.Image,
                     Description = p.Description,
-                    Quantity = (int)p.Quantity,
                     acreage = p.Acgreage,
                     Slug = p.Slug,
                     Approve = p.Approve,
                     Status = p.Status,
-                    PhoneNumber = (int)p.PhoneNumber,
+                    PhoneNumber = Int32.Parse(u.PhoneNumber),
                     Location = p.Location,
                 }).ToListAsync();
             return product;
@@ -76,12 +80,11 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
                 Price = realEstateModel.Price,
                 Image = realEstateModel.Image,
                 Description = realEstateModel.Description,
-                Quantity = realEstateModel.Quantity,
                 Acgreage = realEstateModel.acreage,
                 Slug = realEstateModel.Slug,
                 Approve = realEstateModel.Approve,
                 Status = realEstateModel.Status,
-                PhoneNumber = realEstateModel.PhoneNumber,
+                //PhoneNumber = realEstateModel.PhoneNumber,
                 Location = realEstateModel.Location,
             };
             var create = _dbContext.Add(Model);
@@ -105,7 +108,11 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
 
         public async Task<RealEstateModel> GetByIdAsync(string id)
         {
-            var product = await _dbContext.realEstates.Include(p => p.category).Where(p => p.RealEstateID == id).Select(p =>
+            var product = await _dbContext.realEstates.Include(p => p.category).Where(p => p.RealEstateID == id).Join(
+            _dbContext.Users,
+            p => p.UserID,
+            u => u.Id,
+            (p, u) =>
 
                new RealEstateModel
                {
@@ -118,12 +125,11 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
                    Price = p.Price,
                    Image = p.Image,
                    Description = p.Description,
-                   Quantity = (int)p.Quantity,
                    acreage = p.Acgreage,
                    Slug = p.Slug,
                    Approve = p.Approve,
                    Status = p.Status,
-                   PhoneNumber = (int)p.PhoneNumber,
+                   PhoneNumber = Int32.Parse(u.PhoneNumber),
                    Location = p.Location,
                }).FirstOrDefaultAsync();
             return product;
