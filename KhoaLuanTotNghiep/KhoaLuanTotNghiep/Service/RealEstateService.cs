@@ -56,6 +56,8 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
                     Approve = p.Approve,
                     Status = p.Status,
                     PhoneNumber = Int32.Parse(u.PhoneNumber),
+                    CreateTime = p.CreateTime,
+                    UpdateTime = p.UpdateTime,
                     Location = p.Location,
                 }).ToListAsync();
             return product;

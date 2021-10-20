@@ -34,7 +34,7 @@
     width: 70%;
     z-index: 2;
     position: absolute;
-    top: 343px;
+    top: 150px;
     display: inline-block;
     background-color: #ffffff;
 }
@@ -178,4 +178,12 @@ li {
 
 .card-img-top {
     height: 50%;
+}
+
+a, u {
+    text-decoration: none !important;
+}
+
+.card-text {
+    color: black;
 }
