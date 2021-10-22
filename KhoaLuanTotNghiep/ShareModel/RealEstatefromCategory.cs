@@ -13,6 +13,7 @@ namespace ShareModel
         public int CategoryID { get; set; }
 
         public string UserID { get; set; }
+        
         public string CategoryName { get; set; }
 
         public string ReportID { get; set; }
@@ -32,5 +33,16 @@ namespace ShareModel
         public string Status { get; set; }
 
         public string Location { get; set; }
+
+
+        public List<RealEstatefromCategory> realestates { get; set; }
+        //public string CategoryName { get; set; }
+
+        //public List<RealEstateModel> realestates { get; set; }
+
+        public RealEstatefromCategory()
+        {
+            realestates = new List<RealEstatefromCategory>();
+        }
     }
 }

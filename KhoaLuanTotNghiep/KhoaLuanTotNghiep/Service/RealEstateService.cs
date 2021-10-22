@@ -19,20 +19,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
         {
             _dbContext = dbContext;
         }
-      
-
-        public async Task<RealEstate> DeleteAsync(int id)
-        {
-            var product = await _dbContext.realEstates.FindAsync(id);
-            if (product == null)
-                return null;
-            _dbContext.realEstates.Remove(product);
-            await _dbContext.SaveChangesAsync();
-            return product;
-        }
-
-      
-
+        
         public async Task<IEnumerable<RealEstateModel>> GetAllAsync()
         {
             var product = await _dbContext.realEstates.Include(p => p.category).Join(
@@ -98,16 +85,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
             throw new Exception("Create News Fail");
         }
 
-        public Task<RealEstateModel> UpdateRealEstateAsync(string id, RealEstateModel realEstateModel)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteRealEstateModelAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<RealEstateModel> GetByIdAsync(string id)
         {
             var product = await _dbContext.realEstates.Include(p => p.category).Where(p => p.RealEstateID == id).Join(
@@ -139,9 +116,12 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
 
         public async Task<IEnumerable<RealEstatefromCategory>> GetByCategoryAsync(string categoryName)
         {
-            var products = await _dbContext.realEstates.Include(p => p.category).Where(p => p.category.CategoryName == categoryName).Select(p =>
-                 new RealEstatefromCategory
-                 {
+            var products = await _dbContext.realEstates.Include(p => p.category)
+                .Where(p => p.category.CategoryName == categoryName)
+                .Select(p =>
+           
+                new RealEstatefromCategory
+                 {                 
                      Title = p.Title,
                      Description = p.Description,
                      Price = p.Price,
@@ -152,5 +132,24 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
             return products;
         }
 
+        public async Task<RealEstate> DeleteAsync(int id)
+        {
+            var product = await _dbContext.realEstates.FindAsync(id);
+            if (product == null)
+                return null;
+            _dbContext.realEstates.Remove(product);
+            await _dbContext.SaveChangesAsync();
+            return product;
+        }
+
+        public Task<RealEstateModel> UpdateRealEstateAsync(string id, RealEstateModel realEstateModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteRealEstateModelAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
