@@ -35,14 +35,14 @@ namespace ShareModel
         public string Location { get; set; }
 
 
-        public List<RealEstatefromCategory> realestates { get; set; }
-        //public string CategoryName { get; set; }
+        //public List<RealEstatefromCategory> realestates { get; set; }
+        ////public string CategoryName { get; set; }
 
-        //public List<RealEstateModel> realestates { get; set; }
+        ////public List<RealEstateModel> realestates { get; set; }
 
-        public RealEstatefromCategory()
-        {
-            realestates = new List<RealEstatefromCategory>();
-        }
+        //public RealEstatefromCategory()
+        //{
+        //    realestates = new List<RealEstatefromCategory>();
+        //}
     }
 }

@@ -50,20 +50,20 @@ namespace KhoaLuanTotNghiep_CustomerSite.Service
             return await response.Content.ReadAsAsync<IEnumerable<RealEstatefromCategory>>();
         }
 
-        public async Task<bool> Rating(int productId, int values)
+        public async Task<bool> Rating(string productId, int values)
         {
-            var accesstoken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
+            var accessToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
             var client = _httpClientFactory.CreateClient();
-            client.UseBearerToken(accesstoken);
-            var raterequest = new RateShare
+            client.UseBearerToken(accessToken);
+            var rateRequest = new CreateRatingRequest
             {
                 ProductId = productId,
                 value = values
             };
-            var json = JsonConvert.SerializeObject(raterequest);
+            var json = JsonConvert.SerializeObject(rateRequest);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var res = await client.PostAsync(_configuration.GetValue<string>("backend") + "api/rate", data);
+            var res = await client.PostAsync(_configuration.GetValue<string>("Backend") + "api/Rate", data);
 
             res.EnsureSuccessStatusCode();
 

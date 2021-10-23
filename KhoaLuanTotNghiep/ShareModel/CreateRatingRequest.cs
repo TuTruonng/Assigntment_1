@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ShareModel
 {
-    public class RateShare
+    public class CreateRatingRequest
     {
-        public int ProductId { get; set; }
+        public string ProductId { get; set; }
 
         public int value { get; set; }
     }
