@@ -214,30 +214,30 @@ a, u {
         text-shadow: 1px 1px #bbb;
     }
 
-.rate-area:not(:checked) > label:before {
-    content: '★ ';
-}
+        .rate-area:not(:checked) > label:before {
+            content: '★ ';
+        }
 
-.rate-area > input[type=submit]:checked ~ label {
-    color: greenyellow;
-    text-shadow: 1px 1px #c60;
-    font-size: 450% !important;
-}
+    .rate-area > input[type=submit]:checked ~ label {
+        color: greenyellow;
+        text-shadow: 1px 1px #c60;
+        font-size: 450% !important;
+    }
 
-.rate-area:not(:checked) > label:hover, .rate-area:not(:checked) > label:hover ~ label {
-    color: greenyellow;
-}
+    .rate-area:not(:checked) > label:hover, .rate-area:not(:checked) > label:hover ~ label {
+        color: greenyellow;
+    }
 
-.rate-area > input[type=submit]:checked + label:hover, .rate-area > input[type=submit]:checked + label:hover ~ label, .rate-area > input[type=submit]:checked ~ label:hover, .rate-area > input[type=submit]:checked ~ label:hover ~ label, .rate-area > label:hover ~ input[type=submit]:checked ~ label {
-    color: greenyellow;
-    text-shadow: 1px 1px goldenrod;
-}
+    .rate-area > input[type=submit]:checked + label:hover, .rate-area > input[type=submit]:checked + label:hover ~ label, .rate-area > input[type=submit]:checked ~ label:hover, .rate-area > input[type=submit]:checked ~ label:hover ~ label, .rate-area > label:hover ~ input[type=submit]:checked ~ label {
+        color: greenyellow;
+        text-shadow: 1px 1px goldenrod;
+    }
 
-.rate-area > label:active {
-    position: relative;
-    top: 2px;
-    left: 2px;
-}
+    .rate-area > label:active {
+        position: relative;
+        top: 2px;
+        left: 2px;
+    }
 
 a.navbar-brand {
     white-space: normal;

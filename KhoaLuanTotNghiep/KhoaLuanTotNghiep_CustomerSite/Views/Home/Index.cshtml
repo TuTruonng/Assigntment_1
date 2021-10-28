@@ -1,8 +1,7 @@
 ﻿@model IList<ShareModel.RealEstateModel>
 @section Styles {
-    <link rel="stylesheet" href="~/css/Home.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
 }
-
 
 @{ ViewData["Title"] = "Home Page"; }
 
@@ -70,28 +69,22 @@
 
         </div>
     </div>
-  
         
     <div class="card-deck" id="card-RealEstate">
         @foreach (var product in Model)
         {
-        
-
-        <a class="card" asp-action="Details" asp-controller="RealEstate" asp-route-id="@product.RealEstateID">
+            <a class="card" asp-action="Details" asp-controller="RealEstate" asp-route-id="@product.RealEstateID">
            
-                <img class="card-img-top" src="@product.Image" alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-title">@product.Title</p>
-                    <p class="card-text">@product.Price  -  @product.acreage  <br /><br />    @product.Location</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">@product.CreateTime</small>
-                </div>
+                    <img class="card-img-top" src="@product.Image" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-title">@product.Title</p>
+                        <p class="card-text">@product.Price  -  @product.Acgreage  <br /><br />    @product.Location</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">@product.CreateTime</small>
+                    </div>
 
-        </a>
-
-                }
+            </a>
+         }
         </div>
-   
-    
 </div>

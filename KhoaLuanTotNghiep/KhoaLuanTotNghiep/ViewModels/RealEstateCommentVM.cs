@@ -1,16 +1,28 @@
-﻿using System;
+﻿using KhoaLuanTotNghiep_BackEnd.Models;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace KhoaLuanTotNghiep_BackEnd.Models
+namespace KhoaLuanTotNghiep_BackEnd.ViewModels
 {
-    public class RealEstate
+    public class RealEstateCommentVM
     {
+
+        public List<RealEstateComment> ListOfComments { get; set; }
+
+        public string Comment { get; set; }
+
+        public int Rating { get; set; }
+
         public string RealEstateID { get; set; }
+
         public string UserID { get; set; }
+
         public int CategoryID { get; set; }
+
+        public string CategoryName { get; set; }
+
         public string ReportID { get; set; }
 
         public string Title { get; set; }
@@ -23,7 +35,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Models
 
         public string Acgreage { get; set; }
 
-        public string  Slug { get; set; }
+        public string Slug { get; set; }
 
         public int Approve { get; set; }
 
@@ -33,20 +45,22 @@ namespace KhoaLuanTotNghiep_BackEnd.Models
 
         public string Location { get; set; }
 
+        public int PhoneNumber { get; set; }
+
         public DateTime CreateTime { get; set; }
 
         public DateTime UpdateTime { get; set; }
 
+        public int RatingSum { get; set; }
 
-        public ICollection<Report> reports { get; set; }
+        public int RatingCount { get; set; }
 
-        public virtual IEnumerable<Rate> Rates { get; set; }
+        //public ICollection<Report> reports { get; set; }
 
-        public Category category { get; set; }
+        //public virtual IEnumerable<Rate> Rates { get; set; }
+
+        //public Category category { get; set; }
 
         public User user { get; set; }
-
-        public ICollection<RealEstateComment> RealEstatesComments { get; set; }
-
     }
 }

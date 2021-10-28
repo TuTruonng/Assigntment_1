@@ -23,5 +23,7 @@ namespace KhoaLuanTotNghiep.Data
 
         public DbSet<Rate> rates { get; set; }
 
+        public DbSet<RealEstateComment> realEstateComments { get; set; }
+
     }
 }

@@ -2,6 +2,7 @@
 using KhoaLuanTotNghiep.Data;
 using KhoaLuanTotNghiep_BackEnd.InterfaceService;
 using KhoaLuanTotNghiep_BackEnd.Models;
+using KhoaLuanTotNghiep_BackEnd.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using ShareModel;
 using System;
@@ -19,7 +20,32 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
         {
             _dbContext = dbContext;
         }
-        
+
+    //    public async Task<RealEstateCommentVM> GetComment(String id)
+    //    {
+    //        RealEstate r = _dbContext.realEstates.Find(id);
+    //        RealEstateCommentVM vm = new RealEstateCommentVM();
+
+    //        vm.RealEstateId = id;
+    //        vm.Title = r.Title;
+
+    //        var comments = _dbContext.realEstateComments.Where(d => d.RealEstatesId.Equals(id)).ToList();
+    //        vm.ListOfComments = comments;
+    //        return vm;
+    //    }
+
+    //    public async Task<IList<RealEstateComment>> GetRating(String id)
+    //    {
+    //        var ratings = _dbContext.realEstateComments.Where(d => d.RealEstatesId.Equals(id)).ToList();
+
+    //        if (ratings.Count() > 0)
+    //        {
+    //            var ratingSum = ratings.Sum(d => d.Rating);
+    //            var ratingCount = ratings.Count();
+    //        }
+    //        return ratings;
+    //}
+
         public async Task<IEnumerable<RealEstateModel>> GetAllAsync()
         {
             var product = await _dbContext.realEstates.Include(p => p.category).Join(
@@ -38,7 +64,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
                     Price = p.Price,
                     Image = p.Image,
                     Description = p.Description,
-                    acreage = p.Acgreage,
+                    Acgreage = p.Acgreage,
                     Slug = p.Slug,
                     Approve = p.Approve,
                     Status = p.Status,
@@ -69,7 +95,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
                 Price = realEstateModel.Price,
                 Image = realEstateModel.Image,
                 Description = realEstateModel.Description,
-                Acgreage = realEstateModel.acreage,
+                Acgreage = realEstateModel.Acgreage,
                 Slug = realEstateModel.Slug,
                 Approve = realEstateModel.Approve,
                 Status = realEstateModel.Status,
@@ -85,15 +111,26 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
             throw new Exception("Create News Fail");
         }
 
-        public async Task<RealEstateModel> GetByIdAsync(string id)
+        public async Task<RealEstateCommentVM> GetByIdAsync(string? id)
         {
+            var comments = _dbContext.realEstateComments.Where(d => d.RealEstatesId.Equals(id)).ToList();
+            var ratings = _dbContext.realEstateComments.Where(d => d.RealEstatesId.Equals(id)).ToList();
+            var ratingSum = 0; 
+            var ratingCount = 0;
+
+            if (ratings.Count() > 0)
+            {
+                 ratingSum += ratings.Sum(d => d.Rating);
+                 ratingCount += ratings.Count();
+            }
+            
+
             var product = await _dbContext.realEstates.Include(p => p.category).Where(p => p.RealEstateID == id).Join(
             _dbContext.Users,
             p => p.UserID,
             u => u.Id,
             (p, u) =>
-
-               new RealEstateModel
+               new RealEstateCommentVM
                {
                    RealEstateID = p.RealEstateID,
                    CategoryID = p.CategoryID,
@@ -104,12 +141,15 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
                    Price = p.Price,
                    Image = p.Image,
                    Description = p.Description,
-                   acreage = p.Acgreage,
+                   Acgreage = p.Acgreage,
                    Slug = p.Slug,
                    Approve = p.Approve,
                    Status = p.Status,
                    PhoneNumber = Int32.Parse(u.PhoneNumber),
                    Location = p.Location,
+                   ListOfComments = comments,
+                   RatingSum = ratingSum,
+                   RatingCount = ratingCount
                }).FirstOrDefaultAsync();
             return product;
         }
