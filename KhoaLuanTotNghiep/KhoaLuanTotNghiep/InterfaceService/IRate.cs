@@ -10,5 +10,6 @@ namespace KhoaLuanTotNghiep_BackEnd.InterfaceService
     {
         Task<bool> CreateRate (CreateRatingRequest rate);
 
+        Task<IEnumerable<RateResponse>> GetListRatingAsync();
     }
 }

@@ -1,5 +1,4 @@
 ﻿using KhoaLuanTotNghiep_BackEnd.Models;
-using KhoaLuanTotNghiep_BackEnd.ViewModels;
 using ShareModel;
 using System;
 using System.Collections.Generic;
@@ -20,6 +19,6 @@ namespace KhoaLuanTotNghiep_BackEnd.InterfaceService
 
         Task<IEnumerable<RealEstatefromCategory>> GetByCategoryAsync(string categoryName);
 
-        Task<RealEstateCommentVM> GetByIdAsync(string id);
+        Task<RealEstateModel> GetByIdAsync(string id);
     }
 }

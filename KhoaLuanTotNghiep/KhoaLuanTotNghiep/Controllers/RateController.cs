@@ -1,4 +1,4 @@
-﻿    using KhoaLuanTotNghiep_BackEnd.InterfaceService;
+﻿using KhoaLuanTotNghiep_BackEnd.InterfaceService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShareModel;
@@ -28,6 +28,14 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
         public async Task<IActionResult> CreateRate(CreateRatingRequest rateShare)
         {
             var result = await _rate.CreateRate(rateShare);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetListRatingAsync()
+        {
+            var result = await _rate.GetListRatingAsync();
             return Ok(result);
         }
     }

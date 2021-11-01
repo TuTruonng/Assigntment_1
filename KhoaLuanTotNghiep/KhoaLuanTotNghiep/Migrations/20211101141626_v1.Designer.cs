@@ -10,15 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KhoaLuanTotNghiep_BackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210927162319_v5")]
-    partial class v5
+    [Migration("20211101141626_v1")]
+    partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
+                .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.Category", b =>
@@ -50,9 +50,37 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                     b.Property<string>("NewsName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("NewsID");
 
+                    b.HasIndex("UserID");
+
                     b.ToTable("news");
+                });
+
+            modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.Rates", b =>
+                {
+                    b.Property<int>("IDRate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("RealEstateID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
+
+                    b.HasKey("IDRate");
+
+                    b.HasIndex("RealEstateID");
+
+                    b.ToTable("rates");
                 });
 
             modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.RealEstate", b =>
@@ -81,14 +109,11 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
-
                     b.Property<string>("Price")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                    b.Property<string>("ReportID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Slug")
                         .HasColumnType("nvarchar(max)");
@@ -102,7 +127,14 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                     b.Property<DateTime>("UpdateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("RealEstateID");
+
+                    b.HasIndex("CategoryID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("realEstates");
                 });
@@ -119,7 +151,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RealEstateID")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
@@ -129,18 +161,23 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
 
                     b.HasKey("ReportID");
 
+                    b.HasIndex("RealEstateID");
+
                     b.ToTable("reports");
                 });
 
             modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.Transaction", b =>
                 {
-                    b.Property<string>("RealEstateID")
+                    b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Profit")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("RealEstateID");
+                    b.Property<string>("RealEstateID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserID");
 
                     b.ToTable("transactions");
                 });
@@ -186,6 +223,12 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<int>("Point")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Salary")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -345,6 +388,44 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.News", b =>
+                {
+                    b.HasOne("KhoaLuanTotNghiep_BackEnd.Models.User", null)
+                        .WithMany("news")
+                        .HasForeignKey("UserID");
+                });
+
+            modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.Rates", b =>
+                {
+                    b.HasOne("KhoaLuanTotNghiep_BackEnd.Models.RealEstate", null)
+                        .WithMany("rates")
+                        .HasForeignKey("RealEstateID");
+                });
+
+            modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.RealEstate", b =>
+                {
+                    b.HasOne("KhoaLuanTotNghiep_BackEnd.Models.Category", "category")
+                        .WithMany("realEstates")
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KhoaLuanTotNghiep_BackEnd.Models.User", "user")
+                        .WithMany()
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("category");
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.Report", b =>
+                {
+                    b.HasOne("KhoaLuanTotNghiep_BackEnd.Models.RealEstate", null)
+                        .WithMany("reports")
+                        .HasForeignKey("RealEstateID");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -394,6 +475,23 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.Category", b =>
+                {
+                    b.Navigation("realEstates");
+                });
+
+            modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.RealEstate", b =>
+                {
+                    b.Navigation("rates");
+
+                    b.Navigation("reports");
+                });
+
+            modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.User", b =>
+                {
+                    b.Navigation("news");
                 });
 #pragma warning restore 612, 618
         }

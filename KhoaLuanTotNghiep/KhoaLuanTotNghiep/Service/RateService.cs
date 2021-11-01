@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace KhoaLuanTotNghiep_BackEnd.Service
 {
@@ -25,14 +26,28 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
 
         public async Task<bool> CreateRate(CreateRatingRequest rateShare)
         {
-            var rates = new Rate { RealEstateId = rateShare.ProductId, Value = rateShare.value };
+            var rates = new Rates { RealEstateID = rateShare.ProductId, Value = rateShare.value };
 
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             rates.UserId = userId.ToString();
             _applicationDb.Add(rates);
             await _applicationDb.SaveChangesAsync();
             return true;
+        }
 
+        public async Task<IEnumerable<RateResponse>> GetListRatingAsync()
+        {
+            var list_rate = await _applicationDb.rates
+                .Select(r => new RateResponse
+                {
+                    IdRate = r.IDRate,
+                    value = r.Value,
+                    RatingDate = DateTime.Now,
+                    ProductId = r.RealEstateID,
+                    UserId = r.UserId
+                })
+                .ToListAsync();
+            return list_rate;
         }
     }
 }

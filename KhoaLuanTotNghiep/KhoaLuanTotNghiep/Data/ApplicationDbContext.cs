@@ -19,11 +19,10 @@ namespace KhoaLuanTotNghiep.Data
 
         public DbSet<News> news { get; set; }
 
+        public DbSet<Rates> rates { get; set; }
+
         public DbSet<Transaction> transactions { get; set; }
 
-        public DbSet<Rate> rates { get; set; }
-
-        public DbSet<RealEstateComment> realEstateComments { get; set; }
 
     }
 }

@@ -1,6 +1,4 @@
-﻿using KhoaLuanTotNghiep.Data;
-using KhoaLuanTotNghiep_BackEnd.InterfaceService;
-using KhoaLuanTotNghiep_BackEnd.Models;
+﻿using KhoaLuanTotNghiep_BackEnd.InterfaceService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShareModel;
@@ -21,7 +19,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
         public RealEstateController(IRealEstate realStatrService)
         {
             _realStateService = realStatrService;
-
         }
 
         [HttpGet]
@@ -37,10 +34,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> GetById(string id)
         {
-            if(id == null)
-            {
-                return BadRequest();
-            }
             var result = await _realStateService.GetByIdAsync(id);
             return Ok(result);
         }

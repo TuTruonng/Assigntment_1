@@ -1,5 +1,4 @@
-﻿
-using KhoaLuanTotNghiep_CustomerSite.Extentions;
+﻿using KhoaLuanTotNghiep_CustomerSite.Extentions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -49,6 +48,14 @@ namespace KhoaLuanTotNghiep_CustomerSite.Service
             var response = await client.GetAsync(_configuration.GetValue<string>("Backend") + "RealEstate/category=" + categoryName);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<IEnumerable<RealEstatefromCategory>>();
+        }
+
+        public async Task<IList<RateResponse>> GetListRatings()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetAsync(_configuration.GetValue<string>("Backend") + "api/Rate");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsAsync<IList<RateResponse>>();
         }
 
         public async Task<bool> Rating(string productId, int values)

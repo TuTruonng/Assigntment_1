@@ -29,24 +29,18 @@ namespace KhoaLuanTotNghiep_BackEnd.Models
 
         public string Status { get; set; }
 
-        public bool Active { get; set; }
-
         public string Location { get; set; }
 
         public DateTime CreateTime { get; set; }
 
         public DateTime UpdateTime { get; set; }
 
-
         public ICollection<Report> reports { get; set; }
-
-        public virtual IEnumerable<Rate> Rates { get; set; }
+        public ICollection<Rates> rates { get; set; }
 
         public Category category { get; set; }
 
         public User user { get; set; }
-
-        public ICollection<RealEstateComment> RealEstatesComments { get; set; }
 
     }
 }

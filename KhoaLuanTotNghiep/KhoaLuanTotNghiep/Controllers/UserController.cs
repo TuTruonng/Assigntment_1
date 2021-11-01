@@ -21,7 +21,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
             _user = user;
         }
 
-          [HttpGet]
+        [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<User>>> GetAllUser()
         {

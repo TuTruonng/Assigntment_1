@@ -1,4 +1,4 @@
-﻿    using KhoaLuanTotNghiep_CustomerSite.Service;
+﻿using KhoaLuanTotNghiep_CustomerSite.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -26,8 +26,10 @@ namespace KhoaLuanTotNghiep_CustomerSite.Controllers
         [Route("/RealEstate/{id}")]
         public async Task<IActionResult> Details(string id)
         {
-            
             var result = await _realestateApiClient.GetProductById(id);
+            //var r = await _realestateApiClient.GetListRatings();
+
+            //ViewBag.rating = r;
             return View(result);
         }
 

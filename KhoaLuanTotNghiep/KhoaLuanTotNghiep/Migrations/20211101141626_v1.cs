@@ -26,6 +26,8 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Point = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -58,6 +60,19 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_categories", x => x.CategoryID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "transactions",
+                columns: table => new
+                {
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RealEstateID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Profit = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_transactions", x => x.UserID);
                 });
 
             migrationBuilder.CreateTable(
@@ -166,6 +181,106 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "news",
+                columns: table => new
+                {
+                    NewsID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    NewsName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_news", x => x.NewsID);
+                    table.ForeignKey(
+                        name: "FK_news_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "realEstates",
+                columns: table => new
+                {
+                    RealEstateID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CategoryID = table.Column<int>(type: "int", nullable: false),
+                    ReportID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Acgreage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Slug = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Approve = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_realEstates", x => x.RealEstateID);
+                    table.ForeignKey(
+                        name: "FK_realEstates_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_realEstates_categories_CategoryID",
+                        column: x => x.CategoryID,
+                        principalTable: "categories",
+                        principalColumn: "CategoryID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "rates",
+                columns: table => new
+                {
+                    IDRate = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Value = table.Column<int>(type: "int", nullable: false),
+                    RealEstateID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_rates", x => x.IDRate);
+                    table.ForeignKey(
+                        name: "FK_rates_realEstates_RealEstateID",
+                        column: x => x.RealEstateID,
+                        principalTable: "realEstates",
+                        principalColumn: "RealEstateID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "reports",
+                columns: table => new
+                {
+                    ReportID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RealEstateID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreaeTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpadateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IPAddress = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_reports", x => x.ReportID);
+                    table.ForeignKey(
+                        name: "FK_reports_realEstates_RealEstateID",
+                        column: x => x.RealEstateID,
+                        principalTable: "realEstates",
+                        principalColumn: "RealEstateID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -204,6 +319,31 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_news_UserID",
+                table: "news",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_rates_RealEstateID",
+                table: "rates",
+                column: "RealEstateID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_realEstates_CategoryID",
+                table: "realEstates",
+                column: "CategoryID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_realEstates_UserID",
+                table: "realEstates",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_reports_RealEstateID",
+                table: "reports",
+                column: "RealEstateID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -224,13 +364,28 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "categories");
+                name: "news");
+
+            migrationBuilder.DropTable(
+                name: "rates");
+
+            migrationBuilder.DropTable(
+                name: "reports");
+
+            migrationBuilder.DropTable(
+                name: "transactions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "realEstates");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "categories");
         }
     }
 }

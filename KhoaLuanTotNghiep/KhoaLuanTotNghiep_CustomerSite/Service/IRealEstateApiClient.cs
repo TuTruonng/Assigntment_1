@@ -1,5 +1,4 @@
-﻿
-using ShareModel;
+﻿using ShareModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +13,7 @@ namespace KhoaLuanTotNghiep_CustomerSite.Service
         Task<RealEstateModel> GetProductById(string id);
 
         Task<IEnumerable<RealEstatefromCategory>> GetProductByCategory(string categoryName);
+        Task<IList<RateResponse>> GetListRatings();
 
         Task<bool> Rating(string productId, int values);
     }

@@ -58,14 +58,14 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                     b.ToTable("news");
                 });
 
-            modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.Rate", b =>
+            modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.Rates", b =>
                 {
-                    b.Property<int>("idRate")
+                    b.Property<int>("IDRate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("RealEstateId")
+                    b.Property<string>("RealEstateID")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserId")
@@ -74,9 +74,9 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                     b.Property<int>("Value")
                         .HasColumnType("int");
 
-                    b.HasKey("idRate");
+                    b.HasKey("IDRate");
 
-                    b.HasIndex("RealEstateId");
+                    b.HasIndex("RealEstateID");
 
                     b.ToTable("rates");
                 });
@@ -88,9 +88,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
 
                     b.Property<string>("Acgreage")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
 
                     b.Property<int>("Approve")
                         .HasColumnType("int");
@@ -138,32 +135,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("realEstates");
-                });
-
-            modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.RealEstateComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("PublishedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RealEstatesId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RealEstatesId");
-
-                    b.ToTable("realEstateComments");
                 });
 
             modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.Report", b =>
@@ -422,11 +393,11 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                         .HasForeignKey("UserID");
                 });
 
-            modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.Rate", b =>
+            modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.Rates", b =>
                 {
                     b.HasOne("KhoaLuanTotNghiep_BackEnd.Models.RealEstate", null)
-                        .WithMany("Rates")
-                        .HasForeignKey("RealEstateId");
+                        .WithMany("rates")
+                        .HasForeignKey("RealEstateID");
                 });
 
             modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.RealEstate", b =>
@@ -444,15 +415,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                     b.Navigation("category");
 
                     b.Navigation("user");
-                });
-
-            modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.RealEstateComment", b =>
-                {
-                    b.HasOne("KhoaLuanTotNghiep_BackEnd.Models.RealEstate", "RealEstates")
-                        .WithMany("RealEstatesComments")
-                        .HasForeignKey("RealEstatesId");
-
-                    b.Navigation("RealEstates");
                 });
 
             modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.Report", b =>
@@ -520,9 +482,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
 
             modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.RealEstate", b =>
                 {
-                    b.Navigation("Rates");
-
-                    b.Navigation("RealEstatesComments");
+                    b.Navigation("rates");
 
                     b.Navigation("reports");
                 });
