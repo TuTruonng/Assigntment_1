@@ -76,6 +76,45 @@ namespace KhoaLuanTotNghiep_BackEnd.IdentityServer
                         "KhoaLuan.api"
                     }
                 },
+
+
+                new Client
+                {
+                    ClientName="admin",
+                    ClientId = "admin",
+                    ClientSecrets = { new Secret("secret".Sha256()) },
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+                    RequireClientSecret = false,
+                    RequireConsent = false,
+                    AlwaysSendClientClaims = true,
+                    AllowOfflineAccess = true,
+                    AlwaysIncludeUserClaimsInIdToken = true,
+
+                    RedirectUris = new List<string>          
+                    {
+                        $"https://localhost:3000/authentication/login-callback",
+                        $"https://localhost:3000/silent-renew.html",
+                        $"https://localhost:3000"
+                    },
+                    PostLogoutRedirectUris = new List<string>
+                    {
+                        $"https://localhost:3000/authentication/logout-callback",
+                        $"https://localhost:3000/unauthorized",
+                        $"https://localhost:3000"
+                    },
+                    AllowedCorsOrigins =     
+                    { 
+                        $"https://localhost:3000"
+                    },
+
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "KhoaLuan.api"
+                    }
+                },
             };
     }
 }

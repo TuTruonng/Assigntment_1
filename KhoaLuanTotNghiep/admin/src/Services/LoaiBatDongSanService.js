@@ -1,4 +1,4 @@
-import httpClient from'../HttpClient'
+import httpClient from'../Helpers/httpHelper'
 
 class LoaiBatDongSanService {
   pathSer = "Category";

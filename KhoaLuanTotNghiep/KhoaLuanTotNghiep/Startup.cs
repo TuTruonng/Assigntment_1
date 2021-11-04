@@ -90,7 +90,7 @@ namespace KhoaLuanTotNghiep_BackEnd {
             services.AddCors(options =>
             {
                 options.AddPolicy("Policy", builder => builder
-                    .WithOrigins("<Origin One>", "<Origin Two>")
+                    .WithOrigins("http://localhost:3000")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
@@ -135,6 +135,7 @@ namespace KhoaLuanTotNghiep_BackEnd {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
                 app.UseMigrationsEndPoint();
             }
             else

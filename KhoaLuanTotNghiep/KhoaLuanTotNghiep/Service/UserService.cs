@@ -22,9 +22,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
         {
             var user = await _dbContext.Users.ToListAsync();
             return user;
-
-
-
         }
     }
 }

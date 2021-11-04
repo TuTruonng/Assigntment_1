@@ -4,10 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+export const UserContext = React.createContext({ username: "Tuan" });
+
 ReactDOM.render(
-  <React.StrictMode>
+  <UserContext.Provider value={{ username: "T" }}>
     <App />
-  </React.StrictMode>,
+  </UserContext.Provider>,
+  // <React.StrictMode>
+  //   <App />
+  // </React.StrictMode>,
   document.getElementById('root')
 );
 
