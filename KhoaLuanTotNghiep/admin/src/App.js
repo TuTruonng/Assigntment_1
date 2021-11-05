@@ -68,7 +68,7 @@ function App() {
               <BDSForm />
             </Route>
 
-            <Route path={AUTH}>
+            <Route exact path={AUTH}>
                 <Auth />
               </Route>
           </Switch>

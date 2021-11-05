@@ -82,7 +82,7 @@ namespace KhoaLuanTotNghiep_BackEnd.IdentityServer
                 {
                     ClientName="admin",
                     ClientId = "admin",
-                    ClientSecrets = { new Secret("secret".Sha256()) },
+                    //ClientSecrets = { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
                     RequireClientSecret = false,
@@ -93,25 +93,26 @@ namespace KhoaLuanTotNghiep_BackEnd.IdentityServer
 
                     RedirectUris = new List<string>          
                     {
-                        $"https://localhost:3000/authentication/login-callback",
-                        $"https://localhost:3000/silent-renew.html",
-                        $"https://localhost:3000"
+                        "http://localhost:3000/authentication/login-callback",
+                        "http://localhost:3000/silent-renew.html",
+                        "http://localhost:3000"
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
-                        $"https://localhost:3000/authentication/logout-callback",
-                        $"https://localhost:3000/unauthorized",
-                        $"https://localhost:3000"
+                        "http://localhost:3000/authentication/logout-callback",
+                        "http://localhost:3000/unauthorized",
+                        "http://localhost:3000"
                     },
                     AllowedCorsOrigins =     
                     { 
-                        $"https://localhost:3000"
+                        "http://localhost:3000"
                     },
 
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.OfflineAccess,
                         "KhoaLuan.api"
                     }
                 },

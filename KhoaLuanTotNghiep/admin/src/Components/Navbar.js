@@ -11,7 +11,9 @@ export default class Navbar extends Component {
   };
 
   handleLogin = (e) => {
+    console.log("abc");
     AuthService.loginAsync();
+    
   }
 
   handleLogout = (e) => {
