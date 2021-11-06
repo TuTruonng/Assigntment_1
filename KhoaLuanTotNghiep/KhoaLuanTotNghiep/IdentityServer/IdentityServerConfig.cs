@@ -1,5 +1,7 @@
 ﻿using IdentityServer4;
 using IdentityServer4.Models;
+using ShareModel;
+using ShareModel.Constant;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,9 +46,9 @@ namespace KhoaLuanTotNghiep_BackEnd.IdentityServer
 
                     AllowedGrantTypes = GrantTypes.Code,
 
-                    RedirectUris = { "https://localhost:44360/signin-oidc" },
+                    RedirectUris = { ClientUrlMVC.REDIRECT_URI_MVC },
 
-                    PostLogoutRedirectUris = { "https://localhost:44360/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { ClientUrlMVC.POST_LOGOUT_REDIRECT_URI_MVC },
 
                     AllowedScopes = new List<string>
                     {
@@ -65,9 +67,9 @@ namespace KhoaLuanTotNghiep_BackEnd.IdentityServer
                     RequireConsent = false,
                     RequirePkce = true,
 
-                    RedirectUris =           { $"https://localhost:44375/swagger/oauth2-redirect.html" },
-                    PostLogoutRedirectUris = { $"https://localhost:44375/swagger/oauth2-redirect.html" },
-                    AllowedCorsOrigins =     { $"https://localhost:44375" },
+                    RedirectUris =           { ClientUrlSwagger.REDIRECT_URI_SWAGGER },
+                    PostLogoutRedirectUris = { ClientUrlSwagger.POST_LOGOUT_REDIRECT_URI_SWAGGER },
+                    AllowedCorsOrigins =     { ClientUrlSwagger.ALLOWED_CORS_ORIGIN_SWAGGER },
 
                     AllowedScopes = new List<string>
                     {
@@ -82,7 +84,6 @@ namespace KhoaLuanTotNghiep_BackEnd.IdentityServer
                 {
                     ClientName="admin",
                     ClientId = "admin",
-                    //ClientSecrets = { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
                     RequireClientSecret = false,
@@ -93,19 +94,19 @@ namespace KhoaLuanTotNghiep_BackEnd.IdentityServer
 
                     RedirectUris = new List<string>          
                     {
-                        "http://localhost:3000/authentication/login-callback",
-                        "http://localhost:3000/silent-renew.html",
-                        "http://localhost:3000"
+                        ClientUrlReact.REDIRECT_URI_REACT_AUTH,
+                        ClientUrlReact.REDIRECT_URI_REACT_RENEW,
+                        ClientUrlReact.REDIRECT_URI_REACT_DEFAULT
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
-                        "http://localhost:3000/authentication/logout-callback",
-                        "http://localhost:3000/unauthorized",
-                        "http://localhost:3000"
+                        ClientUrlReact.POST_LOGOUT_REDIRECT_URI_REACT_AUTH,
+                        ClientUrlReact.POST_LOGOUT_REDIRECT_URI_REACT_RENEW,
+                        ClientUrlReact.POST_LOGOUT_REDIRECT_URI_REACT_DEFAULT
                     },
                     AllowedCorsOrigins =     
-                    { 
-                        "http://localhost:3000"
+                    {
+                        ClientUrlReact.ALLOWWED_CORS_ORIGIN
                     },
 
                     AllowedScopes = new List<string>
