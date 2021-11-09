@@ -26,29 +26,56 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<CategoryModel>>> GetListAsync()
         {
-            return Ok(await _categoryService.GetListCategoryAsync());
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            var result = await _categoryService.GetListCategoryAsync();
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
 
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult<CategoryModel>> CreateAsync(CategoryModel Model)
         {
-            if (!ModelState.IsValid) return BadRequest(Model);
-            return Ok(await _categoryService.CreateCategoryAsync(Model));
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(Model);
+            }
+
+            var result = await _categoryService.CreateCategoryAsync(Model);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<CategoryModel>> UpdateAsync(int id, CategoryModel category)
         {
-            if (!ModelState.IsValid) return BadRequest("Category Id is not valid");         
-            return Ok(await _categoryService.UpdateCategoryAsync(id, category));
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(category);
+            }
+
+            var result = await _categoryService.UpdateCategoryAsync(id, category);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> DeleteAsync(int id)
         {
-            if (!ModelState.IsValid) return BadRequest("Category Id is not valid");
-            return Ok(await _categoryService.DeleteCategoryAsync(id));
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(id);
+            }
+
+            var result = await _categoryService.DeleteCategoryAsync(id);
+            return Ok(result);
         }
     }
 }

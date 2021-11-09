@@ -1,5 +1,6 @@
 ﻿using KhoaLuanTotNghiep_CustomerSite.Service;
 using Microsoft.AspNetCore.Mvc;
+using ShareModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace KhoaLuanTotNghiep_CustomerSite.Controllers
             return View(results);
         }
 
-        [Route("/RealEstate/{id}")]
+        [Route("/RealEstate/{id}")] 
         public async Task<IActionResult> Details(string id)
         {
             var result = await _realestateApiClient.GetProductById(id);

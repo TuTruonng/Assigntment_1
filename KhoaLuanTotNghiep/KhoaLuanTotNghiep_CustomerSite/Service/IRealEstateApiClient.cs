@@ -8,11 +8,11 @@ namespace KhoaLuanTotNghiep_CustomerSite.Service
 {
     public interface IRealEstateApiClient
     {
-        Task<IList<RealEstateModel>> GetProducts();
+        Task<IEnumerable<RealEstateModel>> GetProducts();
 
         Task<RealEstateModel> GetProductById(string id);
 
-        Task<IEnumerable<RealEstatefromCategory>> GetProductByCategory(string categoryName);
+        Task<IEnumerable<RealEstatefromCategory>> GetProductByCategory(string category);
         Task<IList<RateResponse>> GetListRatings();
 
         Task<bool> Rating(string productId, int values);

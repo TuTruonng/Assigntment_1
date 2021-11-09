@@ -16,6 +16,9 @@ namespace KhoaLuanTotNghiep_BackEnd.Models
         {
         }
 
+        [PersonalData]
+        public string FullName { get; set; }
+
         public decimal Salary { get; set; }
 
         public int Point { get; set; }

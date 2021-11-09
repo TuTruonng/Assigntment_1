@@ -131,7 +131,16 @@ const ListBDS = () => {
                       {" "}
                     </i>
                   </Link>
-                
+                  <i
+                    className="fas fa-trash-alt"
+                    style={{
+                      marginLeft: "10px",
+                      marginRight: "80px",
+                      fontSize: "20px",
+                      color: "#E54646",
+                    }}
+                    onClick={() => handleDelete(item.realEstateID)}
+                  ></i>
                 </td>
               </tr>
             );

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KhoaLuanTotNghiep_BackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211101141626_v1")]
+    [Migration("20211107094959_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,7 +68,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("RealEstateID")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
@@ -77,8 +77,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("IDRate");
-
-                    b.HasIndex("RealEstateID");
 
                     b.ToTable("rates");
                 });
@@ -200,6 +198,9 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -331,12 +332,10 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -373,12 +372,10 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -393,13 +390,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                     b.HasOne("KhoaLuanTotNghiep_BackEnd.Models.User", null)
                         .WithMany("news")
                         .HasForeignKey("UserID");
-                });
-
-            modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.Rates", b =>
-                {
-                    b.HasOne("KhoaLuanTotNghiep_BackEnd.Models.RealEstate", null)
-                        .WithMany("rates")
-                        .HasForeignKey("RealEstateID");
                 });
 
             modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.RealEstate", b =>
@@ -484,8 +474,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
 
             modelBuilder.Entity("KhoaLuanTotNghiep_BackEnd.Models.RealEstate", b =>
                 {
-                    b.Navigation("rates");
-
                     b.Navigation("reports");
                 });
 

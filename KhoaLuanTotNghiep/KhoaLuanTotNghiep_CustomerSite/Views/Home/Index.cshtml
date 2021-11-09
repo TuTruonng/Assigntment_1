@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="~/css/Style.css" />
 }
 
-
 @{ ViewData["Title"] = "Home Page"; }
 
 <div class="container-fluid" style="padding: 0; margin: 0">
@@ -25,8 +24,7 @@
                     <img class="d-block w-100" src="https://res.cloudinary.com/dusq8k6rj/image/upload/v1633871979/leduyen/gmhzoxx5cnxtxbtcikz1.jpg" alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="https://res.cloudinary.com/dusq8k6rj/image/upload/v1633788906/leduyen/wrzqdzhqldo084zkqvbr.
-                    <a href="D:\Document\Project_Graduation\Assignment\KhoaLuanTotNghiep\KhoaLuanTotNghiep_CustomerSite\Views\Home\Index.cshtml">D:\Document\Project_Graduation\Assignment\KhoaLuanTotNghiep\KhoaLuanTotNghiep_CustomerSite\Views\Home\Index.cshtml</a>jpg" alt="Third slide">
+                    <img class="d-block w-100" src="https://res.cloudinary.com/dusq8k6rj/image/upload/v1633788906/leduyen/wrzqdzhqldo084zkqvbr.jpg" alt="Third slide">
                 </div>
             </div>
 
@@ -72,28 +70,22 @@
 
         </div>
     </div>
-  
-        
+
+
     <div class="card-deck" id="card-RealEstate">
         @foreach (var product in Model)
         {
-        
+<a class="card" asp-action="Details" asp-controller="RealEstate" asp-route-id="@product.RealEstateID">
+    <img class="card-img-top" src="@product.Image" alt="Card image cap">
+    <div class="card-body">
+        <p class="card-title">@product.Title</p>
+        <p class="card-text">@product.Price  -  @product.acreage  <br /><br />    @product.Location</p>
+    </div>
+    <div class="card-footer">
+        <small class="text-muted">@product.CreateTime</small>
+    </div>
 
-        <a class="card" asp-action="Details" asp-controller="RealEstate" asp-route-id="@product.RealEstateID">
-           
-                <img class="card-img-top" src="@product.Image" alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-title">@product.Title</p>
-                    <p class="card-text">@product.Price  -  @product.acreage  <br /><br />    @product.Location</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">@product.CreateTime</small>
-                </div>
+</a>}
+    </div>
 
-        </a>
-
-                }
-        </div>
-   
-    
 </div>

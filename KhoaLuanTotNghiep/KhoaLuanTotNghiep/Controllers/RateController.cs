@@ -27,7 +27,12 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> CreateRate(CreateRatingRequest rateShare)
         {
-            var result = await _rate.CreateRate(rateShare);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var result = await _rate.CreateRate(rateShare);  
             return Ok(result);
         }
 
@@ -35,7 +40,14 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetListRatingAsync()
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var result = await _rate.GetListRatingAsync();
+            if (result == null)
+                return NotFound();
             return Ok(result);
         }
     }

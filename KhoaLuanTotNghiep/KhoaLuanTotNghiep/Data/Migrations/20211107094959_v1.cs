@@ -26,6 +26,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Point = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -60,6 +61,21 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_categories", x => x.CategoryID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "rates",
+                columns: table => new
+                {
+                    IDRate = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Value = table.Column<int>(type: "int", nullable: false),
+                    RealEstateID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_rates", x => x.IDRate);
                 });
 
             migrationBuilder.CreateTable(
@@ -121,8 +137,8 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -166,8 +182,8 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -239,27 +255,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "rates",
-                columns: table => new
-                {
-                    IDRate = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Value = table.Column<int>(type: "int", nullable: false),
-                    RealEstateID = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_rates", x => x.IDRate);
-                    table.ForeignKey(
-                        name: "FK_rates_realEstates_RealEstateID",
-                        column: x => x.RealEstateID,
-                        principalTable: "realEstates",
-                        principalColumn: "RealEstateID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "reports",
                 columns: table => new
                 {
@@ -324,11 +319,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                 name: "IX_news_UserID",
                 table: "news",
                 column: "UserID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_rates_RealEstateID",
-                table: "rates",
-                column: "RealEstateID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_realEstates_CategoryID",

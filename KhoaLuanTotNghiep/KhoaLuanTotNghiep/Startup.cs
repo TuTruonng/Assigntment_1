@@ -3,7 +3,10 @@ using KhoaLuanTotNghiep_BackEnd.IdentityServer;
 using KhoaLuanTotNghiep_BackEnd.Interface;
 using KhoaLuanTotNghiep_BackEnd.InterfaceService;
 using KhoaLuanTotNghiep_BackEnd.Models;
+using KhoaLuanTotNghiep_BackEnd.Security.Authorization.Handlers;
+using KhoaLuanTotNghiep_BackEnd.Security.Authorization.Requirements;
 using KhoaLuanTotNghiep_BackEnd.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using ShareModel.Constant;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,23 +41,23 @@ namespace KhoaLuanTotNghiep_BackEnd {
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+
+            services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = "/CustomAuthentication/Login";
+            });
+            services.AddTransient<INews, NewsService>();
             services.AddTransient<IUser, UserService>();
             services.AddTransient<Icategory, CategoryService>();
             services.AddTransient<IRate, RateService>();
             services.AddTransient<IRealEstate, RealEstateService>();
 
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("Policy", builder => builder
-            //        .WithOrigins("<Origin One>", "<Origin Two>")
-            //        .AllowAnyMethod()
-            //        .AllowAnyHeader()
-            //        .AllowCredentials()
-            //    );
-            //});
-            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddSingleton<IAuthorizationHandler, AdminRoleHandler>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddHttpContextAccessor();
 
@@ -80,11 +84,14 @@ namespace KhoaLuanTotNghiep_BackEnd {
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("Bearer", policy =>
+                options.AddPolicy(SecurityConstants.BEARER_POLICY, policy =>
                 {
                     policy.AddAuthenticationSchemes("Bearer");
                     policy.RequireAuthenticatedUser();
                 });
+
+                options.AddPolicy(SecurityConstants.ADMIN_ROLE_POLICY, policy =>
+                    policy.Requirements.Add(new AdminRoleRequirement()));
             });
 
             services.AddCors(options =>
@@ -96,6 +103,8 @@ namespace KhoaLuanTotNghiep_BackEnd {
                     .AllowCredentials()
                 );
             });
+
+            services.AddRazorPages();
 
             services.AddControllersWithViews();
 
@@ -132,10 +141,10 @@ namespace KhoaLuanTotNghiep_BackEnd {
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
                 app.UseMigrationsEndPoint();
             }
             else
@@ -158,7 +167,7 @@ namespace KhoaLuanTotNghiep_BackEnd {
 
             app.UseIdentityServer();
             app.UseAuthorization();
-           // app.UseAuthentication();
+  
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

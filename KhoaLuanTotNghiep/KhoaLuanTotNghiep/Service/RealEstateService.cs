@@ -1,5 +1,6 @@
 ﻿using Gremlin.Net.Process.Traversal;
 using KhoaLuanTotNghiep.Data;
+using KhoaLuanTotNghiep_BackEnd.Enum;
 using KhoaLuanTotNghiep_BackEnd.InterfaceService;
 using KhoaLuanTotNghiep_BackEnd.Models;
 using Microsoft.EntityFrameworkCore;
@@ -20,14 +21,10 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
             _dbContext = dbContext;
         }
         
-        public async Task<IEnumerable<RealEstateModel>> GetAllAsync()
+        public async Task<ICollection<RealEstateModel>> GetAllAsync()
         {
-            var product = await _dbContext.realEstates.Include(p => p.category).Join(
-            _dbContext.Users,
-            p => p.UserID,
-            u => u.Id,
-            (p, u) =>
-                new RealEstateModel
+            var queryable = _dbContext.realEstates.Include(p => p.category).Include(p => p.user).AsQueryable();
+            var product = await queryable.Select(p => new RealEstateModel
                 {
                     RealEstateID = p.RealEstateID,
                     CategoryID = p.CategoryID,
@@ -42,7 +39,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
                     Slug = p.Slug,
                     Approve = p.Approve,
                     Status = p.Status,
-                    PhoneNumber = Int32.Parse(u.PhoneNumber),
+                    PhoneNumber = Int32.Parse(p.user.PhoneNumber),
                     CreateTime = p.CreateTime,
                     UpdateTime = p.UpdateTime,
                     Location = p.Location,
@@ -71,9 +68,8 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
                 Description = realEstateModel.Description,
                 Acgreage = realEstateModel.acreage,
                 Slug = realEstateModel.Slug,
-                Approve = realEstateModel.Approve,
+                Approve = (int)StateApprove.FALSE,
                 Status = realEstateModel.Status,
-                //PhoneNumber = realEstateModel.PhoneNumber,
                 Location = realEstateModel.Location,
             };
             var create = _dbContext.Add(Model);
@@ -88,7 +84,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
         public async Task<RealEstateModel> GetByIdAsync(string id)
         {
             
-            var queryable = _dbContext.realEstates.Include(p => p.category).Include(p => p.rates).Include(p => p.user).AsQueryable();
+            var queryable = _dbContext.realEstates.Include(p => p.category).Include(p => p.user).AsQueryable();
             queryable = queryable.Where(p => p.RealEstateID == id);
             var list = await queryable.Select(p =>  new RealEstateModel
                {
@@ -112,10 +108,10 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
             return list;
         }
 
-        public async Task<IEnumerable<RealEstatefromCategory>> GetByCategoryAsync(string categoryName)
+        public async Task<IEnumerable<RealEstatefromCategory>> GetByCategoryAsync(string categoryname)
         {
             var products = await _dbContext.realEstates.Include(p => p.category)
-                .Where(p => p.category.CategoryName == categoryName)
+                .Where(p => p.category.CategoryName == categoryname)
                 .Select(p =>
            
                 new RealEstatefromCategory
@@ -140,14 +136,38 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
             return product;
         }
 
-        public Task<RealEstateModel> UpdateRealEstateAsync(string id, RealEstateModel realEstateModel)
+        public async Task<RealEstateModel> UpdateRealEstateAsync(string id, RealEstateModel realEstateModel)
         {
-            throw new NotImplementedException();
+            var realEstate = await _dbContext.realEstates.FirstOrDefaultAsync(x => x.RealEstateID == id);
+            if (realEstate == null)
+            {
+                throw new Exception("Have not NewsID");
+            }
+            realEstateModel.RealEstateID = Guid.NewGuid().ToString();
+            realEstate.Title = realEstateModel.Title;
+            realEstate.Approve = realEstateModel.Approve;
+            var result = await _dbContext.SaveChangesAsync();
+            if (result > 0)
+            {
+                return realEstateModel;
+            }
+            throw new Exception("Update  fail");
         }
 
-        public Task<bool> DeleteRealEstateModelAsync(string id)
+        public async Task<bool> DeleteRealEstateModelAsync(string id)
         {
-            throw new NotImplementedException();
+            var realEstate = await _dbContext.realEstates.FirstOrDefaultAsync(x => x.RealEstateID == id);
+            if (realEstate == null)
+            {
+                throw new Exception("Have not RealEstate");
+            }
+            var delete = _dbContext.Remove(realEstate);
+            var result = _dbContext.SaveChanges();
+            if (result > 0)
+            {
+                return true;
+            }
+            throw new Exception("Delete fail");
         }
     }
 }

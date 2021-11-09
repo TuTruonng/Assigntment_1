@@ -9,7 +9,7 @@ namespace KhoaLuanTotNghiep_BackEnd.InterfaceService
 {
     public interface IRealEstate
     {
-        Task<IEnumerable<RealEstateModel>> GetAllAsync();
+        Task<ICollection<RealEstateModel>> GetAllAsync();
 
         Task<RealEstateModel> CreateRealEstatesAsync(RealEstateModel realEstateModel);
 
@@ -17,7 +17,7 @@ namespace KhoaLuanTotNghiep_BackEnd.InterfaceService
 
         Task<bool> DeleteRealEstateModelAsync(string id);
 
-        Task<IEnumerable<RealEstatefromCategory>> GetByCategoryAsync(string categoryName);
+        Task<IEnumerable<RealEstatefromCategory>> GetByCategoryAsync(string categoryname);
 
         Task<RealEstateModel> GetByIdAsync(string id);
     }

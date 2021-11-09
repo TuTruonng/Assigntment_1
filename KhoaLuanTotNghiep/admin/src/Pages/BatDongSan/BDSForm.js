@@ -20,7 +20,6 @@ const BDSForm = ({ match }) => {
       if (realEstateID !== undefined) {
         await fetchRealEstate(realEstateID);
       }
-
     }
     
     fetchdata();
@@ -31,6 +30,7 @@ const BDSForm = ({ match }) => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
+      title: RealEstate.title,
       approve: RealEstate.approve,
       phoneNumber: RealEstate.phoneNumber,
     }
@@ -112,7 +112,17 @@ const BDSForm = ({ match }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="phoneNumber" className="text">UserID</label>
+          <label htmlFor="title" className="text">Title</label>
+          <input className="input-form"
+            id="title"
+            name="title"
+            type="text"
+             {...formik.getFieldProps('title')}
+             defaultValue={formik.values.title}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="phoneNumber" className="text">PhoneNumber</label>
           <input className="input-form"
             id="phoneNumber"
             name="phoneNumber"

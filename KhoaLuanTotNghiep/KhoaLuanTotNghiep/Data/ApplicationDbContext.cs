@@ -1,4 +1,5 @@
-﻿using KhoaLuanTotNghiep_BackEnd.Models;
+﻿using KhoaLuanTotNghiep_BackEnd.Data.SeedData;
+using KhoaLuanTotNghiep_BackEnd.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +11,13 @@ namespace KhoaLuanTotNghiep.Data
             : base(options)
         {
         }
-        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.SeedRealEstateData();
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<Category> categories { get; set; }
 
         public DbSet<RealEstate> realEstates { get; set; }

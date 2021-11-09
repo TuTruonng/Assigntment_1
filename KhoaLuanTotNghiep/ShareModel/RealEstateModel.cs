@@ -35,7 +35,7 @@ namespace ShareModel
 
         public DateTime UpdateTime { get; set; }
 
-        public List<RateResponse> Rates { get; set; }
+        //public List<RateResponse> Rates { get; set; }
         public string Status { get; set; }
 
         public int PhoneNumber { get; set; }

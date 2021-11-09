@@ -20,18 +20,18 @@ class BatDongSanService {
   }
 
   get(id){
-    return httpClient.get(this.pathSer+"/"+id);
+    return this.axios.get(this.pathSer+"/"+id);
   }
   edit(id, objectEdit) {
-    return httpClient.put(this.pathSer + "/" + id, objectEdit);
+    return this.axios.put(this.pathSer + "/" + id, objectEdit);
   }
 
   delete(id) {
-    return httpClient.delete(this.pathSer + "/" + id);  
+    return this.axios.delete(this.pathSer + "/" + id);  
   }
 
   create(objectNew) {
-    return httpClient.post(this.pathSer, objectNew);
+    return this.axios.post(this.pathSer, objectNew);
   }
 }
   export default new BatDongSanService();

@@ -1,3 +1,4 @@
+using KhoaLuanTotNghiep_CustomerSite.Extensions.ServiceCollection;
 using KhoaLuanTotNghiep_CustomerSite.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -55,22 +56,22 @@ namespace KhoaLuanTotNghiep_CustomerSite
                         RoleClaimType = "role"
                     };
                 });
-         
 
+            services.AddHttpContextAccessor();
+            services.AddCustomHttpClient(Configuration);
+            services.AddRazorPages();
             services.AddHttpClient();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddControllersWithViews();
             services.AddTransient<IRealEstateApiClient, RealEstateApiClient>();
             services.AddTransient<ICategoryApiClient, CategoryApiClient>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
-
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-
-            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

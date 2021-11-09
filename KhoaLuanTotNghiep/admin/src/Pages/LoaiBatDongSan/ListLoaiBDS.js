@@ -19,7 +19,6 @@ const ListLoaiBDS = () => {
   const _fetchCategory = () => {
     LoaiBatDongSanService.getList().then(({ data }) => setcategories(data));
   };
-  console.log("leduyen");
   const handleCreate = () => setSelected({ Name: "", TypeProductId: 0 });
 
   const handleDelete = (itemId) => {

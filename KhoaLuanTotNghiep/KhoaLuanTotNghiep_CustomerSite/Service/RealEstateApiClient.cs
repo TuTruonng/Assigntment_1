@@ -5,9 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Newtonsoft.Json;
 using ShareModel;
-using System;
+using ShareModel.Constant;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,42 +17,45 @@ namespace KhoaLuanTotNghiep_CustomerSite.Service
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IConfiguration _configuration;
+        //private readonly IConfiguration _configuration;
 
-        public RealEstateApiClient(IHttpContextAccessor httpContextAccessor, IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public RealEstateApiClient(IHttpContextAccessor httpContextAccessor, IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
             _httpContextAccessor = httpContextAccessor;
-            _configuration = configuration;
+            //_configuration = configuration;
         }
-        public async Task<IList<RealEstateModel>> GetProducts()
+        public async Task<IEnumerable<RealEstateModel>> GetProducts()
         {
-            var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync(_configuration.GetValue<string>("Backend") + "RealEstate");
+            var client = _httpClientFactory.CreateClient(ServiceConstants.BACK_END_NAMED_CLIENT);
+            var response = await client.GetAsync(EndpointConstants.GET_REALESTATES);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<IList<RealEstateModel>>();
+            var list = await response.Content.ReadAsAsync<IEnumerable<RealEstateModel>>();
+            return list;
         }
 
         public async Task<RealEstateModel> GetProductById(string id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync(_configuration.GetValue<string>("Backend") + "RealEstate/" + id);
+            var client = _httpClientFactory.CreateClient(ServiceConstants.BACK_END_NAMED_CLIENT);
+            var response = await client.GetAsync($"{EndpointConstants.GET_REALESTATES}\\{id}");
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<RealEstateModel>();
+            var realestate = await response.Content.ReadAsAsync<RealEstateModel>();
+            return realestate;
         }
 
-        public async Task<IEnumerable<RealEstatefromCategory>> GetProductByCategory(string categoryName)
+        public async Task<IEnumerable<RealEstatefromCategory>> GetProductByCategory(string category)
         {
-            var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync(_configuration.GetValue<string>("Backend") + "RealEstate/category=" + categoryName);
+            var client = _httpClientFactory.CreateClient(ServiceConstants.BACK_END_NAMED_CLIENT);
+            var response = await client.GetAsync($"{EndpointConstants.GET_REALESTATES}\\{"category=" + category}");
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<IEnumerable<RealEstatefromCategory>>();
+            var real_category = await response.Content.ReadAsAsync<IEnumerable<RealEstatefromCategory>>();
+            return real_category;
         }
 
         public async Task<IList<RateResponse>> GetListRatings()
         {
-            var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync(_configuration.GetValue<string>("Backend") + "api/Rate");
+            var client = _httpClientFactory.CreateClient(ServiceConstants.BACK_END_NAMED_CLIENT);
+            var response = await client.GetAsync(EndpointConstants.GET_RATES);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<IList<RateResponse>>();
         }
@@ -71,7 +73,7 @@ namespace KhoaLuanTotNghiep_CustomerSite.Service
             var json = JsonConvert.SerializeObject(rateRequest);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var res = await client.PostAsync(_configuration.GetValue<string>("Backend") + "api/Rate", data);
+            var res = await client.PostAsync(EndpointConstants.GET_RATES, data);
 
             res.EnsureSuccessStatusCode();
 

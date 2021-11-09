@@ -1,7 +1,9 @@
 ﻿using KhoaLuanTotNghiep_BackEnd.InterfaceService;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using ShareModel;
+using ShareModel.Constant;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +12,10 @@ using System.Threading.Tasks;
 namespace KhoaLuanTotNghiep_BackEnd.Controllers
 {
     [Route("[controller]")]
+    [EnableCors("AllowOrigins")]
     [ApiController]
-   
+    [Authorize("Bearer")]
+
     public class RealEstateController : ControllerBase
     {
         public readonly IRealEstate _realStateService;
@@ -23,71 +27,97 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        //[Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
         public async Task<ActionResult<RealEstateModel>> Get()
         {
-            var product = await _realStateService.GetAllAsync();
-            return Ok(product);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var result = await _realStateService.GetAllAsync();
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
 
         [HttpGet]
         [Route("{id}")]
-        [AllowAnonymous]
+        [Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
         public async Task<ActionResult> GetById(string id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var result = await _realStateService.GetByIdAsync(id);
+            if (result == null)
+                return NotFound();
             return Ok(result);
         }
 
         [HttpGet]
         [Route("category={categoryName}")]
-        [AllowAnonymous]
+        [Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
         public async Task<ActionResult> GetByCategory(string categoryName)
         {
-            var results = await _realStateService.GetByCategoryAsync(categoryName);
-            return Ok(results);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(categoryName);
+            }
+
+            var result = await _realStateService.GetByCategoryAsync(categoryName);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
-
-        //[HttpPost]
-        //[AllowAnonymous]
-        //public async Task<ActionResult<RealEstateModel>> Create([FromForm] RealEstateCreateRequest productShare)
-        //{
-
-        //    var result = await _realStateService.CreateRealEstatesAsync(productShare);
-        //    return Ok(result);
-        //}
 
         [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult<RealEstateModel>> CreateAsync(RealEstateModel realEstate)
+        [Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
+        public async Task<ActionResult<RealEstateModel>> CreateAsync([FromForm] RealEstateModel productShare)
         {
-            if (!ModelState.IsValid) return BadRequest(realEstate);
-            return Ok(await _realStateService.CreateRealEstatesAsync(realEstate));
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(productShare);
+            }
 
+            var result = await _realStateService.CreateRealEstatesAsync(productShare);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
 
-        //[HttpDelete]
-        //[Route("{id}")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    var result = await _realStateService.DeleteRealEstateModelAsync(id);
-        //    if (result == null)
-        //        return NotFound();
-        //    return Ok(result);
-        //}
+        [HttpDelete]
+        [Route("{id}")]
+        [Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (!ModelState.IsValid && string.IsNullOrEmpty(id))
+            {
+                return BadRequest(id);
+            }
 
-        //[HttpPut]
-        //[Route("{id}")]
-        //public async Task<ActionResult> Update(int id, [FromForm] ProductCreateRequest model)
-        //{
-        //    var product = await _product.FindByIdAsync(id);
-        //    if (product == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var result = await _product.UpdateAsync(id, model);
-        //    return Ok(result);
-        //}
+            var result = await _realStateService.DeleteRealEstateModelAsync(id);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        //[AllowAnonymous]
+        [Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
+        public async Task<ActionResult> UpdateAsync(string id, [FromForm] RealEstateModel model)
+        {
+            if (!ModelState.IsValid && string.IsNullOrEmpty(id))
+            {
+                return BadRequest(id);
+            }
+
+            var result = await _realStateService.UpdateRealEstateAsync(id, model);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
 
     }
 }

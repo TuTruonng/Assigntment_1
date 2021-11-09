@@ -36,7 +36,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Models
         public DateTime UpdateTime { get; set; }
 
         public ICollection<Report> reports { get; set; }
-        public ICollection<Rates> rates { get; set; }
 
         public Category category { get; set; }
 
