@@ -8,8 +8,8 @@ namespace KhoaLuanTotNghiep_BackEnd.InterfaceService
 {
     public interface IRate
     {
-        Task<bool> CreateRate (CreateRatingRequest rate);
+        Task<CreateRatingRequest> CreateRate(CreateRatingRequest rate);
 
-        Task<IEnumerable<RateResponse>> GetListRatingAsync();
+        Task<IEnumerable<RateResponse>> GetListRatingAsync(string id);
     }
 }

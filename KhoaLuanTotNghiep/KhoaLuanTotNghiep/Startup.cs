@@ -9,9 +9,7 @@ using KhoaLuanTotNghiep_BackEnd.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,10 +18,9 @@ using Microsoft.OpenApi.Models;
 using ShareModel.Constant;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace KhoaLuanTotNghiep_BackEnd { 
+namespace KhoaLuanTotNghiep_BackEnd
+{
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -136,7 +133,7 @@ namespace KhoaLuanTotNghiep_BackEnd {
                 });
             });
         }
-            
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -167,7 +164,7 @@ namespace KhoaLuanTotNghiep_BackEnd {
 
             app.UseIdentityServer();
             app.UseAuthorization();
-  
+
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

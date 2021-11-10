@@ -60,7 +60,7 @@ const ListBDS = () => {
                 placeholder="Search"
                 aria-label="Search"
               />
-              <div className="input-group-append" style={{border: "1px dotted #e0dcdc"}}>
+              <div className="input-group-append">
                 <button className="btn btn-sidebar">
                   <i className="fas fa-search fa-fw"></i>
                 </button>
@@ -68,9 +68,9 @@ const ListBDS = () => {
               </div>
             </div>
           </div>
-          <div className="col-sm-2" style={{ marginLeft: "100px" }}>
+          <div className="col-sm-2">
             <Link to={`/CreateBDS/`}>
-              <Button outline color="success" style={{ width: "150px"}}>
+              <Button outline color="success" >
                 Create
               </Button>
             </Link>
@@ -79,10 +79,10 @@ const ListBDS = () => {
         
       </div>
       <br/>
-      <Table  style ={{backgroundColor : "#e9d8f4", bordercollapse:"collapse",width:"100%"}}>
+      <Table>
      
         <thead>
-          <tr style ={{backgroundColor : "#58257b", color:"white"}}>
+          <tr className="title-table">
             <th>STT</th>
             <th>RealEstateID</th>
             <th>CategoryID</th>

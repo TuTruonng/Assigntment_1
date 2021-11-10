@@ -62,9 +62,10 @@ namespace KhoaLuanTotNghiep_CustomerSite.Service
 
         public async Task<bool> Rating(string productId, int values)
         {
-            var accessToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
-            var client = _httpClientFactory.CreateClient();
-            client.UseBearerToken(accessToken);
+            //var accessToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
+
+            //client.UseBearerToken(accessToken);
+
             var rateRequest = new CreateRatingRequest
             {
                 ProductId = productId,
@@ -73,13 +74,12 @@ namespace KhoaLuanTotNghiep_CustomerSite.Service
             var json = JsonConvert.SerializeObject(rateRequest);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
+            var client = _httpClientFactory.CreateClient(ServiceConstants.BACK_END_NAMED_CLIENT);
             var res = await client.PostAsync(EndpointConstants.GET_RATES, data);
 
             res.EnsureSuccessStatusCode();
 
-            var result = await res.Content.ReadAsAsync<bool>();
-
-            return result;
+            return await Task.FromResult(true);
         }
     }
 }

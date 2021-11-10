@@ -9,7 +9,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Models
     public class Category
     {
         [Key]
-        public int CategoryID { get; set; }
+        public string CategoryID { get; set; }
         public string CategoryName { get; set; }
 
         public string Description { get; set; }

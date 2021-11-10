@@ -2,16 +2,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShareModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace KhoaLuanTotNghiep_BackEnd.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    [Authorize("Bearer")]
+    [Route("[controller]")]
+    //[Authorize("Bearer")]
 
     public class RateController : ControllerBase
     {
@@ -24,28 +21,32 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
         }
 
         [HttpPost]
+        //[Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
         [AllowAnonymous]
-        public async Task<IActionResult> CreateRate(CreateRatingRequest rateShare)
+        public async Task<IActionResult> CreateRate([FromBody] CreateRatingRequest rateShare)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(rateShare);
             }
 
-            var result = await _rate.CreateRate(rateShare);  
+            var result = await _rate.CreateRate(rateShare);
+            if (result == null)
+                return NotFound();
             return Ok(result);
         }
 
-        [HttpGet]
+
+        [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetListRatingAsync()
+        public async Task<IActionResult> GetListRatingAsync(string id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            var result = await _rate.GetListRatingAsync();
+            var result = await _rate.GetListRatingAsync(id);
             if (result == null)
                 return NotFound();
             return Ok(result);

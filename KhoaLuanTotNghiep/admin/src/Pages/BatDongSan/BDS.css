@@ -1,7 +1,9 @@
 .form {   
     text-align: center;
     background-color: #e9d8f4;
-    height: 500px;
+    margin-left: 250px;
+    width: 100%;
+    height: auto;
   }
   .button {
     background-color :#58257b;
@@ -56,3 +58,7 @@
     
   }
   
+  .title-table{
+    background-color: #58257b;
+    color:white
+  }

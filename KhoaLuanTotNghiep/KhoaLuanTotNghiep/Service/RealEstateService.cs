@@ -1,5 +1,4 @@
-﻿using Gremlin.Net.Process.Traversal;
-using KhoaLuanTotNghiep.Data;
+﻿using KhoaLuanTotNghiep.Data;
 using KhoaLuanTotNghiep_BackEnd.Enum;
 using KhoaLuanTotNghiep_BackEnd.InterfaceService;
 using KhoaLuanTotNghiep_BackEnd.Models;
@@ -20,32 +19,32 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
         {
             _dbContext = dbContext;
         }
-        
+
         public async Task<ICollection<RealEstateModel>> GetAllAsync()
         {
             var queryable = _dbContext.realEstates.Include(p => p.category).Include(p => p.user).AsQueryable();
             var product = await queryable.Select(p => new RealEstateModel
-                {
-                    RealEstateID = p.RealEstateID,
-                    CategoryID = p.CategoryID,
-                    UserID = p.UserID,
-                    CategoryName = p.category.CategoryName,
-                    ReportID = p.ReportID,
-                    Title = p.Title,
-                    Price = p.Price,
-                    Image = p.Image,
-                    Description = p.Description,
-                    acreage = p.Acgreage,
-                    Slug = p.Slug,
-                    Approve = p.Approve,
-                    Status = p.Status,
-                    PhoneNumber = Int32.Parse(p.user.PhoneNumber),
-                    CreateTime = p.CreateTime,
-                    UpdateTime = p.UpdateTime,
-                    Location = p.Location,
-                }).ToListAsync();
+            {
+                RealEstateID = p.RealEstateID,
+                CategoryID = p.CategoryID,
+                UserID = p.UserID,
+                CategoryName = p.category.CategoryName,
+                ReportID = p.ReportID,
+                Title = p.Title,
+                Price = p.Price,
+                Image = p.Image,
+                Description = p.Description,
+                acreage = p.Acgreage,
+                Slug = p.Slug,
+                Approve = p.Approve,
+                Status = p.Status,
+                PhoneNumber = Int32.Parse(p.user.PhoneNumber),
+                CreateTime = p.CreateTime,
+                UpdateTime = p.UpdateTime,
+                Location = p.Location,
+            }).ToListAsync();
             return product;
-            
+
         }
 
         public async Task<RealEstateModel> CreateRealEstatesAsync(RealEstateModel realEstateModel)
@@ -83,29 +82,29 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
 
         public async Task<RealEstateModel> GetByIdAsync(string id)
         {
-            
             var queryable = _dbContext.realEstates.Include(p => p.category).Include(p => p.user).AsQueryable();
             queryable = queryable.Where(p => p.RealEstateID == id);
-            var list = await queryable.Select(p =>  new RealEstateModel
-               {
-                   RealEstateID = p.RealEstateID,
-                   CategoryID = p.CategoryID,
-                   UserID = p.UserID,
-                   CategoryName = p.category.CategoryName,
-                   ReportID = p.ReportID,
-                   Title = p.Title,
-                   Price = p.Price,
-                   Image = p.Image,
-                   Description = p.Description,
-                   acreage = p.Acgreage,
-                   Slug = p.Slug,
-                   Approve = p.Approve,
-                   Status = p.Status,
-                   PhoneNumber = Int32.Parse(p.user.PhoneNumber),
-                   //Rating = p.Rates.ToList(),
-                   Location = p.Location,
-               }).FirstOrDefaultAsync();
-            return list;
+            var real = await queryable.Select(p => new RealEstateModel
+            {
+                RealEstateID = p.RealEstateID,
+                CategoryID = p.CategoryID,
+                UserID = p.UserID,
+                CategoryName = p.category.CategoryName,
+                ReportID = p.ReportID,
+                Title = p.Title,
+                Price = p.Price,
+                Image = p.Image,
+                Description = p.Description,
+                acreage = p.Acgreage,
+                Slug = p.Slug,
+                Approve = p.Approve,
+                Status = p.Status,
+                PhoneNumber = Int32.Parse(p.user.PhoneNumber),
+                CreateTime = p.CreateTime,
+                UpdateTime = p.UpdateTime,
+                Location = p.Location,
+            }).FirstOrDefaultAsync();
+            return real;
         }
 
         public async Task<IEnumerable<RealEstatefromCategory>> GetByCategoryAsync(string categoryname)
@@ -113,20 +112,20 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
             var products = await _dbContext.realEstates.Include(p => p.category)
                 .Where(p => p.category.CategoryName == categoryname)
                 .Select(p =>
-           
+
                 new RealEstatefromCategory
-                 {                 
-                     Title = p.Title,
-                     Description = p.Description,
-                     Price = p.Price,
-                     Image = p.Image,
-                     CategoryName = p.category.CategoryName
-                 }).ToListAsync();
+                {
+                    Title = p.Title,
+                    Description = p.Description,
+                    Price = p.Price,
+                    Image = p.Image,
+                    CategoryName = p.category.CategoryName
+                }).ToListAsync();
 
             return products;
         }
 
-        public async Task<RealEstate> DeleteAsync(int id)
+        public async Task<RealEstate> DeleteAsync(string id)
         {
             var product = await _dbContext.realEstates.FindAsync(id);
             if (product == null)

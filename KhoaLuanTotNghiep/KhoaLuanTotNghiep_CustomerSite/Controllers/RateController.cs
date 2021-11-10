@@ -1,9 +1,5 @@
 ﻿using KhoaLuanTotNghiep_CustomerSite.Service;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace KhoaLuanTotNghiep_CustomerSite.Controllers
@@ -17,9 +13,13 @@ namespace KhoaLuanTotNghiep_CustomerSite.Controllers
             _realEstateApiClient = realEstateApiClient;
         }
 
-        [Authorize]
         public async Task<IActionResult> Voting(string ProductID, int rating)
         {
+            if (!ModelState.IsValid || ProductID is null)
+            {
+                return NotFound();
+            }
+
             string uri_Redirect = Request.Headers["Referer"].ToString();
             var result = await _realEstateApiClient.Rating(ProductID, rating);
 

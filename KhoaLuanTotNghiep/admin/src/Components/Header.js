@@ -52,7 +52,7 @@ export default class Header extends Component {
                   <div className="media-body">
                     <h3 className="dropdown-item-title">
                       Brad Diesel
-                          <span className="float-right text-sm text-danger"><i className="fas fa-star"></i></span>
+                      <span className="float-right text-sm text-danger"><i className="fas fa-star"></i></span>
                     </h3>
                     <p className="text-sm">Call me whenever you can...</p>
                     <p className="text-sm text-muted"><i className="far fa-clock mr-1"></i> 4 Hours Ago</p>
@@ -68,7 +68,7 @@ export default class Header extends Component {
                   <div className="media-body">
                     <h3 className="dropdown-item-title">
                       John Pierce
-                          <span className="float-right text-sm text-muted"><i className="fas fa-star"></i></span>
+                      <span className="float-right text-sm text-muted"><i className="fas fa-star"></i></span>
                     </h3>
                     <p className="text-sm">I got your message bro</p>
                     <p className="text-sm text-muted"><i className="far fa-clock mr-1"></i> 4 Hours Ago</p>
@@ -84,7 +84,7 @@ export default class Header extends Component {
                   <div className="media-body">
                     <h3 className="dropdown-item-title">
                       Nora Silvester
-                          <span className="float-right text-sm text-warning"><i className="fas fa-star"></i></span>
+                      <span className="float-right text-sm text-warning"><i className="fas fa-star"></i></span>
                     </h3>
                     <p className="text-sm">The subject goes here</p>
                     <p className="text-sm text-muted"><i className="far fa-clock mr-1"></i> 4 Hours Ago</p>
@@ -107,12 +107,12 @@ export default class Header extends Component {
               <div className="dropdown-divider"></div>
               <a href="#" className="dropdown-item">
                 <i className="fas fa-envelope mr-2"></i> 4 new messages
-                    <span className="float-right text-muted text-sm">3 mins</span>
+                <span className="float-right text-muted text-sm">3 mins</span>
               </a>
               <div className="dropdown-divider"></div>
               <a href="#" className="dropdown-item">
                 <i className="fas fa-file mr-2"></i> 3 new reports
-                    <span className="float-right text-muted text-sm">2 days</span>
+                <span className="float-right text-muted text-sm">2 days</span>
               </a>
               <div className="dropdown-divider"></div>
               <a href="#" className="dropdown-item dropdown-footer">See All Notifications</a>

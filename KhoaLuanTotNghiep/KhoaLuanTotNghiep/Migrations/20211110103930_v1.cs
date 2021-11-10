@@ -53,8 +53,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                 name: "categories",
                 columns: table => new
                 {
-                    CategoryID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CategoryID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -203,6 +202,8 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                 {
                     NewsID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Img = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NewsName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -223,7 +224,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                 {
                     RealEstateID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserID = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CategoryID = table.Column<int>(type: "int", nullable: false),
+                    CategoryID = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ReportID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -251,7 +252,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Migrations
                         column: x => x.CategoryID,
                         principalTable: "categories",
                         principalColumn: "CategoryID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(

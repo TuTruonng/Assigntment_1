@@ -1,8 +1,7 @@
 ﻿@model ShareModel.RealEstateModel
-
-@*@{ 
-    var rate = (ShareModel.RateResponse)ViewBag.rating;
-}*@
+@*@{
+        var rate = (ShareModel.RateResponse)ViewBag.rating;
+    }*@
 
 @section Styles {
     <link rel="stylesheet" href="~/css/Style.css" />
@@ -29,41 +28,17 @@
                 <h3>@Model.Price.ToString().Insert(3, ".") VNĐ</h3>
             </div>
             <div>
-                @*@foreach (var c in comments)
-        {
-            <hr />
-            <div class="row">
-                <div class="col-md-3">
-                    <i>@c.RatingDate</i>
-                    <br />
-                    @for (var i = 1; i <= c.Value; i++)
-                    {
-                        <span class="starGlowN"></span>
-                    }
-                    @for (var i = (c.Value + 1); i <= 5; i++)
-                    {
-                        <span class="starFadeN"></span>
-                    }
-                </div>
-                <div class="col-md-9">
-                    @Html.Raw(c.Comments.Replace("\n", "<br />"))
 
 
-                </div>
-            </div>
-        }
-        <hr />
-        <partial name="~/Views/Shared/_CommentPartial.cshtml" />*@
-          
-                @*@for (int i = 0; i < rate.value; i++)
-                {
-                    <span class="glyphicon glyphicon-star"></span>
-                }
-                @for (int i = rate.value; i < 5; i++)
-                {
-                    <span class="glyphicon glyphicon-star-empty"></span>
-                }
-                @rate.value stars*@
+                @*@for (int i = 0; i < .value; i++)
+                    {
+                        <span class="glyphicon glyphicon-star"></span>
+                    }
+                    @for (int i = rate.value; i < 5; i++)
+                    {
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                    }
+                    @rate.value stars*@
 
             </div>
         </div>
@@ -95,6 +70,4 @@
             }
         }
     </div>
-    </div>
-
-
+</div>

@@ -1,9 +1,5 @@
 ﻿using KhoaLuanTotNghiep_CustomerSite.Service;
 using Microsoft.AspNetCore.Mvc;
-using ShareModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace KhoaLuanTotNghiep_CustomerSite.Controllers
@@ -20,25 +16,43 @@ namespace KhoaLuanTotNghiep_CustomerSite.Controllers
         [Route("/RealEstate")]
         public async Task<IActionResult> Index()
         {
-            var results = await _realestateApiClient.GetProducts();
-            return View(results);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var result = await _realestateApiClient.GetProducts();
+            if (result == null)
+                return NotFound();
+            return View(result);
         }
 
         [Route("/RealEstate/{id}")] 
         public async Task<IActionResult> Details(string id)
         {
-            var result = await _realestateApiClient.GetProductById(id);
-            //var r = await _realestateApiClient.GetListRatings();
+            if (!ModelState.IsValid && string.IsNullOrEmpty(id))
+            {
+                return BadRequest(id);
+            }
 
-            //ViewBag.rating = r;
+            var result = await _realestateApiClient.GetProductById(id);
+            if (result == null)
+                return NotFound();
             return View(result);
         }
 
         [Route("/RealEstate/category{categoryName}")]
         public async Task<IActionResult> CategoryById(string categoryName)
         {
-            var results = await _realestateApiClient.GetProductByCategory(categoryName);
-            return View(results);
+            if (!ModelState.IsValid && string.IsNullOrEmpty(categoryName))
+            {
+                return BadRequest();
+            }
+
+            var result = await _realestateApiClient.GetProductByCategory(categoryName);
+            if (result == null)
+                return NotFound();
+            return View(result);
         }
     }
 }

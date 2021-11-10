@@ -10,7 +10,7 @@ namespace ShareModel
     {
         public string RealEstateID { get; set; }
 
-        public int CategoryID { get; set; }
+        public string CategoryID { get; set; }
 
         public string UserID { get; set; }
         public string CategoryName { get; set; }
@@ -35,7 +35,7 @@ namespace ShareModel
 
         public DateTime UpdateTime { get; set; }
 
-        //public List<RateResponse> Rates { get; set; }
+        public List<RateResponse> Rates { get; set; }
         public string Status { get; set; }
 
         public int PhoneNumber { get; set; }

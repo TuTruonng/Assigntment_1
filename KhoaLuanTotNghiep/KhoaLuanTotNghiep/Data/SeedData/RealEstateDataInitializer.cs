@@ -15,8 +15,8 @@ namespace KhoaLuanTotNghiep_BackEnd.Data.SeedData
                 new RealEstate
                 {
                     RealEstateID = "1",
-                    UserID = "1",
-                    CategoryID = 1,
+                    UserID = "9ccb5f39-7b81-47fa-a1cd-2e18d1ad7a8b",
+                    CategoryID = "1",
                     Title = "RA HÀNG DÃY SHOPHOUSE CHÂN THÁP TÀI CHÍNH DỰ ÁN THE MANOR CETRAL PARK KINH DOANH CỰC TỐTRA HÀNG DÃY SHOPHOUSE CHÂN THÁP TÀI CHÍNH DỰ ÁN THE MANOR CETRAL PARK KINH DOANH CỰC TỐT",
                     Price = "19 tỷ",
                     Image = "https://res.cloudinary.com/dusq8k6rj/image/upload/v1634380024/leduyen/rv7lrwnztkzvnzrqltha.png",
@@ -32,8 +32,8 @@ namespace KhoaLuanTotNghiep_BackEnd.Data.SeedData
                 new RealEstate
                 {
                     RealEstateID = "2",
-                    UserID = "1",
-                    CategoryID = 1,
+                    UserID = "9ccb5f39-7b81-47fa-a1cd-2e18d1ad7a8b",
+                    CategoryID = "1",
                     Title = "RA HÀNG DÃY SHOPHOUSE CHÂN THÁP TÀI CHÍNH DỰ ÁN THE MANOR CETRAL PARK KINH DOANH CỰC TỐTRA HÀNG DÃY SHOPHOUSE CHÂN THÁP TÀI CHÍNH DỰ ÁN THE MANOR CETRAL PARK KINH DOANH CỰC TỐT",
                     Price = "19 tỷ",
                     Image = "https://res.cloudinary.com/dusq8k6rj/image/upload/v1634380024/leduyen/rv7lrwnztkzvnzrqltha.png",
@@ -49,8 +49,8 @@ namespace KhoaLuanTotNghiep_BackEnd.Data.SeedData
                 new RealEstate
                 {
                     RealEstateID = "3",
-                    UserID = "1",
-                    CategoryID = 2,
+                    UserID = "9ccb5f39-7b81-47fa-a1cd-2e18d1ad7a8b",
+                    CategoryID = "2",
                     Title = "RA HÀNG DÃY SHOPHOUSE CHÂN THÁP TÀI CHÍNH DỰ ÁN THE MANOR CETRAL PARK KINH DOANH CỰC TỐTRA HÀNG DÃY SHOPHOUSE CHÂN THÁP TÀI CHÍNH DỰ ÁN THE MANOR CETRAL PARK KINH DOANH CỰC TỐT",
                     Price = "19 tỷ",
                     Image = "https://res.cloudinary.com/dusq8k6rj/image/upload/v1634379964/leduyen/p9zypdbshv8spvwl0m0o.png",
@@ -66,8 +66,8 @@ namespace KhoaLuanTotNghiep_BackEnd.Data.SeedData
                 new RealEstate
                 {
                     RealEstateID = "4",
-                    UserID = "1",
-                    CategoryID = 2,
+                    UserID = "9ccb5f39-7b81-47fa-a1cd-2e18d1ad7a8b",
+                    CategoryID = "2",
                     Title = "RA HÀNG DÃY SHOPHOUSE CHÂN THÁP TÀI CHÍNH DỰ ÁN THE MANOR CETRAL PARK KINH DOANH CỰC TỐTRA HÀNG DÃY SHOPHOUSE CHÂN THÁP TÀI CHÍNH DỰ ÁN THE MANOR CETRAL PARK KINH DOANH CỰC TỐT",
                     Price = "19 tỷ",
                     Image = "https://res.cloudinary.com/dusq8k6rj/image/upload/v1634379964/leduyen/p9zypdbshv8spvwl0m0o.png",
@@ -83,8 +83,8 @@ namespace KhoaLuanTotNghiep_BackEnd.Data.SeedData
                 new RealEstate
                 {
                     RealEstateID = "5",
-                    UserID = "1",
-                    CategoryID = 3,
+                    UserID = "9ccb5f39-7b81-47fa-a1cd-2e18d1ad7a8b",
+                    CategoryID = "3",
                     Title = "RA HÀNG DÃY SHOPHOUSE CHÂN THÁP TÀI CHÍNH DỰ ÁN THE MANOR CETRAL PARK KINH DOANH CỰC TỐTRA HÀNG DÃY SHOPHOUSE CHÂN THÁP TÀI CHÍNH DỰ ÁN THE MANOR CETRAL PARK KINH DOANH CỰC TỐT",
                     Price = "19 tỷ",
                     Image = "https://res.cloudinary.com/dusq8k6rj/image/upload/v1634379264/leduyen/mmgcl8rhah6i2nzfuef3.jpg",
@@ -100,8 +100,8 @@ namespace KhoaLuanTotNghiep_BackEnd.Data.SeedData
                 new RealEstate
                 {
                     RealEstateID = "6",
-                    UserID = "1",
-                    CategoryID = 3,
+                    UserID = "9ccb5f39-7b81-47fa-a1cd-2e18d1ad7a8b",
+                    CategoryID = "3",
                     Title = "RA HÀNG DÃY SHOPHOUSE CHÂN THÁP TÀI CHÍNH DỰ ÁN THE MANOR CETRAL PARK KINH DOANH CỰC TỐTRA HÀNG DÃY SHOPHOUSE CHÂN THÁP TÀI CHÍNH DỰ ÁN THE MANOR CETRAL PARK KINH DOANH CỰC TỐT",
                     Price = "19 tỷ",
                     Image = "https://res.cloudinary.com/dusq8k6rj/image/upload/v1634379264/leduyen/mmgcl8rhah6i2nzfuef3.jpg",

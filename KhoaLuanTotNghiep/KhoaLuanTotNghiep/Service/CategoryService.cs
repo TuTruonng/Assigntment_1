@@ -41,7 +41,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
 
         }
 
-        public async Task<bool> DeleteCategoryAsync(int id)
+        public async Task<bool> DeleteCategoryAsync(string id)
         {
             var asset = await _dbContext.categories.FirstOrDefaultAsync(x => x.CategoryID == id);
             if (asset == null)
@@ -60,15 +60,16 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
         public async Task<ICollection<CategoryModel>> GetListCategoryAsync()
         {
             return await _dbContext.categories
-                .Select(category => new CategoryModel 
-                { 
-                    CategoryID = category.CategoryID, 
-                    CategoryName = category.CategoryName, 
-                    Description = category.Description })
+                .Select(category => new CategoryModel
+                {
+                    CategoryID = category.CategoryID,
+                    CategoryName = category.CategoryName,
+                    Description = category.Description
+                })
                 .ToListAsync();
         }
 
-        public async Task<CategoryModel> UpdateCategoryAsync(int id, CategoryModel categoryModel)
+        public async Task<CategoryModel> UpdateCategoryAsync(string id, CategoryModel categoryModel)
         {
             var category = await _dbContext.categories.FirstOrDefaultAsync(x => x.CategoryID == id);
             if (category == null)
@@ -83,7 +84,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Service
                 return categoryModel;
             }
             throw new Exception("Delete category fail");
-           
+
         }
     }
 }

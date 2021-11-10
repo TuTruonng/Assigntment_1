@@ -1,8 +1,6 @@
 ﻿
 using ShareModel;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace KhoaLuanTotNghiep_BackEnd.Interface
@@ -13,8 +11,8 @@ namespace KhoaLuanTotNghiep_BackEnd.Interface
 
         Task<CategoryModel> CreateCategoryAsync(CategoryModel categoryModel);
 
-        Task<CategoryModel> UpdateCategoryAsync(int id, CategoryModel categoryModel);
+        Task<CategoryModel> UpdateCategoryAsync(string id, CategoryModel categoryModel);
 
-        Task<bool> DeleteCategoryAsync(int id);
+        Task<bool> DeleteCategoryAsync(string id);
     }
 }

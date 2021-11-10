@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KhoaLuanTotNghiep_CustomerS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShareModel", "ShareModel\ShareModel.csproj", "{7FBA9DAB-3E49-4737-AE31-CB4B9A879478}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KhoaLuanTotNghiep_UnitTest", "KhoaLuanTotNghiep_UnitTest\KhoaLuanTotNghiep_UnitTest.csproj", "{54F70E1C-FEDE-4382-89BC-D5599A226581}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7FBA9DAB-3E49-4737-AE31-CB4B9A879478}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FBA9DAB-3E49-4737-AE31-CB4B9A879478}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FBA9DAB-3E49-4737-AE31-CB4B9A879478}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54F70E1C-FEDE-4382-89BC-D5599A226581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54F70E1C-FEDE-4382-89BC-D5599A226581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54F70E1C-FEDE-4382-89BC-D5599A226581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54F70E1C-FEDE-4382-89BC-D5599A226581}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

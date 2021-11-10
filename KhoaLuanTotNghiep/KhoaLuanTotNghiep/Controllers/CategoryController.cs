@@ -12,12 +12,12 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-   // [Authorize("Bearer")]
+    // [Authorize("Bearer")]
     public class CategoryController : ControllerBase
     {
         private readonly Icategory _categoryService;
 
-        public CategoryController (Icategory categoryService)
+        public CategoryController(Icategory categoryService)
         {
             _categoryService = categoryService;
         }
@@ -52,7 +52,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<CategoryModel>> UpdateAsync(int id, CategoryModel category)
+        public async Task<ActionResult<CategoryModel>> UpdateAsync(string id, CategoryModel category)
         {
             if (!ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> DeleteAsync(int id)
+        public async Task<ActionResult<bool>> DeleteAsync(string id)
         {
 
             if (!ModelState.IsValid)

@@ -4,9 +4,6 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using ShareModel;
 using ShareModel.Constant;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace KhoaLuanTotNghiep_BackEnd.Controllers
@@ -27,7 +24,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        //[Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
         public async Task<ActionResult<RealEstateModel>> Get()
         {
             if (!ModelState.IsValid)
@@ -44,7 +40,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
         [HttpGet]
         [Route("{id}")]
         [Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
-        public async Task<ActionResult> GetById(string id)
+        public async Task<ActionResult<bool>> GetById(string id)
         {
             if (!ModelState.IsValid)
             {
@@ -74,7 +70,9 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
+
+        [AllowAnonymous]
+        //[Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
         public async Task<ActionResult<RealEstateModel>> CreateAsync([FromForm] RealEstateModel productShare)
         {
             if (!ModelState.IsValid)
@@ -91,7 +89,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
         [HttpDelete]
         [Route("{id}")]
         [Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<ActionResult<bool>> Delete(string id)
         {
             if (!ModelState.IsValid && string.IsNullOrEmpty(id))
             {
@@ -104,7 +102,6 @@ namespace KhoaLuanTotNghiep_BackEnd.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        //[AllowAnonymous]
         [Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
         public async Task<ActionResult> UpdateAsync(string id, [FromForm] RealEstateModel model)
         {

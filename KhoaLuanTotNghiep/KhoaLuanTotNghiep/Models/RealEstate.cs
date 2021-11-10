@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KhoaLuanTotNghiep_BackEnd.Models
 {
@@ -10,7 +7,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Models
     {
         public string RealEstateID { get; set; }
         public string UserID { get; set; }
-        public int CategoryID { get; set; }
+        public string CategoryID { get; set; }
         public string ReportID { get; set; }
 
         public string Title { get; set; }
@@ -23,7 +20,7 @@ namespace KhoaLuanTotNghiep_BackEnd.Models
 
         public string Acgreage { get; set; }
 
-        public string  Slug { get; set; }
+        public string Slug { get; set; }
 
         public int Approve { get; set; }
 
